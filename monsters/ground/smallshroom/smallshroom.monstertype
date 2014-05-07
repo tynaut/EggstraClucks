@@ -2,7 +2,6 @@
   "__merge" : [],
   "baseParameters" : {
     "scripts" : [
-      "/scripts/inventoryManager.lua",
       "/monsters/ground/feedState.lua",
       "/monsters/ground/matingState.lua",
       "/monsters/ground/birthState.lua",

@@ -39,9 +39,8 @@ function feedState.update(dt, stateData)
     if stateData.timer < 0 then
       local r = nil
       if stateData.feedType == 1 then
-        local feedType = entity.configParameter("tamedFeedType", {"animalfeed"})
-        local feed = self.inv.matchInContainer(stateData.targetId, {name = feedType})
-        if feed then r = self.inv.takeFromContainer(stateData.targetId, {name = feed.name, count = 1}) end
+        local feed = feedState.matchFeed(stateData.targetId)
+        if feed and world.containerConsume(stateData.targetId, feed) then r = {} end
       elseif stateData.feedType == 2 then
         if world.entityExists(stateData.targetId) then
           world.callScriptedEntity(stateData.targetId, "entity.smash")
@@ -50,7 +49,7 @@ function feedState.update(dt, stateData)
       else
         r = world.takeItemDrop(stateData.targetId, entity.id())
       end
-      if r ~= nil then
+      if r then
         if r.count ~= nil and r.count > 1 then
           world.spawnItem(r.name, stateData.targetPosition, r.count - 1)
         end
@@ -89,11 +88,11 @@ function feedState.findSeed(position)
     end
   end
 
+  --look for feed in containers
   objectIds = world.objectQuery(position, range, { callScript = "entity.configParameter", callScriptArgs = {"category"}, callScriptResult = "storage" })
-
   for _,oId in ipairs(objectIds) do
     if entity.entityInSight(oId) then
-      local feed = self.inv.matchInContainer(oId, {name = feedType})
+      local feed = feedState.matchFeed(oId)
       if feed ~= nil then
         if entity.type() ~= "smallshroom" and entity.type() ~= "chicken" and math.random() < 0.5 then
           --world.placeObject("poop", {position[1], position[2] - 2})
@@ -105,6 +104,7 @@ function feedState.findSeed(position)
     end
   end
   
+  --look for feed as placed objects
   for i,v in ipairs(feedType) do
     objectIds = world.objectQuery(position, range, { name = v })
     for _,oId in ipairs(objectIds) do
@@ -116,4 +116,21 @@ function feedState.findSeed(position)
     end
   end
   return nil
+end
+-------------------------------------------------
+function feedState.matchFeed(containerId)
+  local feedType = entity.configParameter("tamedFeedType", {"animalfeed"})
+  local size = world.containerSize(containerId)
+  if size == nil then return end
+  for i = 0,size,1 do
+    for _,n in ipairs(feedType) do
+      local item = world.containerItemAt(containerId, i)
+      if item ~= nil then
+        local r = string.find(item.name, n)
+        if r ~= nil then
+          return {name = item.name, 1}
+        end
+      end
+    end
+  end
 end

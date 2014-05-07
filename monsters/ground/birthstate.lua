@@ -27,15 +27,15 @@ function birthState.update(dt, stateData)
     --TODO make chicken sit for eggs!
     entity.setAnimationState("movement", "idle")
     if stateData.timer < 0 then
-      if stateData.birthItem then
+      local birth = creature.birth()
+      if birth.name then
         if math.random() > 0.995 then
           local mutator = entity.configParameter("tamedParameters.mutator", "")
-          stateData.birthItem = mutator .. stateData.birthItem
+          birth.name = mutator .. birth.name
         end
-        local item = stateData.birthItem
-        local count = stateData.count
-        if stateData.targetId == nil or not self.inv.putInContainer(stateData.targetId, {name = item, count = count}) then
-          world.spawnItem(item, position, count)      
+        local item = creature.deposit(stateData.targetId, birth)
+        if item ~= nil then
+          world.spawnItem(item.name, position, item.count)
         end
       else
         local bnds = entity.configParameter("movementSettings")
@@ -56,8 +56,6 @@ function birthState.update(dt, stateData)
         end
         world.spawnMonster(params.type, entity.position(), params)
       end
-      creature.respawn = true
-      creature.despawn()
       return true,entity.configParameter("tamedParameters.cooldown", 10)
     end
   else
@@ -67,24 +65,21 @@ function birthState.update(dt, stateData)
   
   return false
 end
-
+-------------------------------------------------
 function birthState.findNest(position)
-  local birth = creature.birth()
   local targetPosition = position
   local targetId = nil
   local timer = 1
-  if birth.item then
+  if entity.configParameter("tamedParameters.birthItem") then
     local range = entity.configParameter("tamedParameters.searchRange", 15.0)
-    local p1 = {position[1] + range, position[2]}
-    local p2 = {position[1] - range, position[2]}
-    --TODO just look for a container that can add to
-    local objectIds = world.objectQuery(position, range, { callScript = "entity.configParameter", callScriptArgs = {"objectName"}, callScriptResult = "chickennest" })
-    for _,oId in ipairs(objectIds) do
-      if entity.entityInSight(oId) then
-        targetId = oId
-        targetPosition = world.entityPosition(oId)
-        break
-      end
+    local p1 = {position[1] - range, position[2]}
+    local p2 = {position[1] + range, position[2]}
+    targetId = birthState.getContainer(p1, p2, "chickennest")
+    if targetId == nil then
+      targetId = birthState.getContainer(p1, p2)
+    end
+    if targetId ~= nil then
+      targetPosition = world.entityPosition(targetId)
     end
     timer = entity.randomizeParameterRange("tamedParameters.birthTime", {10, 10})
   end
@@ -92,8 +87,21 @@ function birthState.findNest(position)
   return {
     targetPosition = targetPosition,
     targetId = targetId,
-    birthItem = birth.item,
-    count = birth.count,
     timer = timer
   }
+end
+-------------------------------------------------
+function birthState.getContainer(p1, p2, name)
+  local args = {"category"}
+  local result = "storage"
+  if name ~= nil then
+    args = {"objectName"}
+    result = "chickennest"
+  end
+  local objectIds = world.objectLineQuery(p1, p2, { callScript = "entity.configParameter", callScriptArgs = args, callScriptResult = result})
+  for _,oId in ipairs(objectIds) do
+    if entity.entityInSight(oId) then
+      return oId
+    end
+  end
 end

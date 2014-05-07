@@ -25,7 +25,6 @@
       "/monsters/ground/knockoutState.lua",
       "/monsters/ground/wanderState.lua",
       
-      "/scripts/inventoryManager.lua",
       "/monsters/ground/feedState.lua",
       "/monsters/ground/matingState.lua",
       "/monsters/ground/birthState.lua",

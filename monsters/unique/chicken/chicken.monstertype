@@ -1,8 +1,7 @@
 {
   "__merge" : [],
   "baseParameters" : {
-    "scripts" : [ 
-      "/scripts/inventoryManager.lua",
+    "scripts" : [
       "/monsters/unique/chicken/secondary.lua",
       "/monsters/ground/feedState.lua",
       "/monsters/ground/birthState.lua",
@@ -20,7 +19,7 @@
       "feedTime" : [3.0, 5.0],
       "feedRange" : 1.5,
       "feedCooldown" : 180,
-      "searchRange" : 10,
+      "searchRange" : 15,
       "cooldown" : 15,
       "mutator" : "golden"
     },
