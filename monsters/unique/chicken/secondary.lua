@@ -9,7 +9,9 @@ function init(args)
     "fleeState",
     "dieState",
     "feedState",
-    "birthState"
+    "birthState",
+    "beckonState",
+    "slaughterState"
   })
   self.state.leavingState = function(stateName)
     entity.setAnimationState("movement", "idle")

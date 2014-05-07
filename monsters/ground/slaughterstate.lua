@@ -5,6 +5,11 @@ slaughterState = {
   range = 1.5
 }
 
+function canSlaughter()
+  if creature == nil then return false end
+  return creature.isTamed()
+end
+
 function slaughterState.enterWith(params)
   if creature ~= nil and creature.isTamed() and params.slaughterId then
     return {
@@ -27,8 +32,9 @@ function slaughterState.update(dt, stateData)
   end
 
   if stateData.timer < 0 then
+    local position = entity.position()
     local targetPosition = vec2.add(world.entityPosition(stateData.slaughterId), slaughterState.offset)
-    local toTarget = world.distance(targetPosition, self.position)
+    local toTarget = world.distance(targetPosition, position)
     local distance = world.magnitude(toTarget)
     
     if distance < slaughterState.range then
@@ -40,7 +46,6 @@ function slaughterState.update(dt, stateData)
       movement = 1
     end
 
-    entity.setAnimationState("attack", "idle")
     move({ movement, toTarget[2] })
   end
   return false--stateData.timer < 0

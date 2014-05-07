@@ -26,5 +26,13 @@
         }
       }
     }
+  },
+  "particleEmitters" : {
+    "slaughter" : {
+      "emissionRate" : 60,
+      "particles" : [
+        { "particle" : "eggstraparticleslaughter" }
+      ]
+    }
   }
 }

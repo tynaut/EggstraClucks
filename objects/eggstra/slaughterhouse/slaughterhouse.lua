@@ -69,7 +69,7 @@ function cancelSlaughter()
 end
 --------------------------------------------------------------------------------
 function getSlaughterTable()
-  self.slaughterIds = world.monsterQuery(self.position, slaughter.range, { callScript = "creature.isTamed", order = "nearest" }) 
+  self.slaughterIds = world.monsterQuery(self.position, slaughter.range, { callScript = "canSlaughter", order = "nearest" }) 
   self.slaughterIndex = 1
 end
 --------------------------------------------------------------------------------

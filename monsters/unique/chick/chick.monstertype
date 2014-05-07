@@ -28,6 +28,7 @@
       "span" : 300,
       "growthType" : "chicken"
     },
+    "slaughterPool" : [{"name" : "rawnugget", "count" : 1}],
     
     "generation" : 1,
 

@@ -6,6 +6,8 @@
       "/monsters/unique/chicken/secondary.lua",
       "/monsters/ground/feedState.lua",
       "/monsters/ground/birthState.lua",
+      "/monsters/ground/beckonState.lua",
+      "/monsters/ground/slaughterState.lua",
       "/scripts/delegate.lua",
       "/scripts/creature.lua"
     ],
@@ -23,6 +25,7 @@
       "mutator" : "golden"
     },
     "tamedFeedType" : ["animalfeed", "seed"],
-    "tamedFibreType" : [ ]
+    "tamedFibreType" : [ ],
+    "slaughterPool" : [{"name" : "rawpoultry", "count" : 2}]
   }
 }
