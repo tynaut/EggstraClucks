@@ -7,12 +7,12 @@
   "shortdescription" : "Golden Egg",
   "race" : "generic",
 
-  "apexDescription" : "A little chick.",
+  "apexDescription" : "A golden egg, but where did it come from?",
   "avianDescription" : "These are very valuable.",
-  "floranDescription" : "Tassty little chicken.",
-  "glitchDescription" : "Cute. It's adorable.",
-  "humanDescription" : "An adorable little chick.",
-  "hylotlDescription" : "Birds like this need protection.",
+  "floranDescription" : "Is it Tassty?",
+  "glitchDescription" : "Declaration. This is improbable.",
+  "humanDescription" : "A golden egg.",
+  "hylotlDescription" : "A lovely golden egg.",
 
   "inventoryIcon" : "geggicon.png",
   "orientations" : [

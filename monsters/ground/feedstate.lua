@@ -2,11 +2,10 @@
 feedState = {}
 -------------------------------------------------
 function feedState.enter()
+  if hasTarget() then return nil end
+  
   if creature ~= nil and creature.isTamed() then
-    if self.feedCooldown == nil then
-      self.feedCooldown = entity.configParameter("tamedParameters.feedCooldown", 0)
-    end
-    if self.feedCooldown > 0 then return nil end
+    if self.feedCooldown == nil or self.feedCooldown > 0 then return nil end
     local position = entity.position()
     local feed = feedState.findSeed(position)
     if feed ~= nil then
@@ -14,27 +13,35 @@ function feedState.enter()
         targetId = feed.targetId,
         targetPosition = feed.targetPosition,
         timer = entity.randomizeParameterRange("tamedParameters.feedTime"),
-        isContainer = feed.isContainer
+        isContainer = feed.isContainer,
+        feedRange = feed.feedRange
       }
     end
   end
   return nil,entity.configParameter("tamedParameters.cooldown", 10)
 end
+
+function feedState.enterWith(params)
+  if params.feed then return feedState.enter() end
+  return nil
+end
 -------------------------------------------------
 function feedState.update(dt, stateData)
+  if hasTarget() then return true end
+  
   stateData.timer = stateData.timer - dt
   
   local position = entity.position()
   local toTarget = world.distance(stateData.targetPosition, position)
   local distance = world.magnitude(toTarget)
-  if distance <= entity.configParameter("tamedParameters.feedRange", 2) then
+  if distance < stateData.feedRange then
     entity.setAnimationState("movement", "idle")
     if stateData.timer < 0 then
       local r = nil
       if stateData.isContainer then
         local feedType = entity.configParameter("tamedParameters.feed", "animalfeed")
         local feed = self.inv.matchInContainer(stateData.targetId, {name = feedType})
-        r = self.inv.takeFromContainer(stateData.targetId, {name = feed.name, count = 1})
+        if feed then r = self.inv.takeFromContainer(stateData.targetId, {name = feed.name, count = 1}) end
       else
         r = world.takeItemDrop(stateData.targetId, entity.id())
       end
@@ -56,10 +63,11 @@ function feedState.update(dt, stateData)
 end
 -------------------------------------------------
 function feedState.findSeed(position)
+  local feedRange = entity.configParameter("tamedParameters.feedRange", 2)
   local range = entity.configParameter("tamedParameters.searchRange", 5.0)
   local p1 = {position[1] - range, position[2] - 1}
   local p2 = {position[1] + range, position[2] + 1}
-  local objectIds = world.itemDropQuery(p1, p2)
+  local objectIds = world.itemDropQuery(position, range) --p1, p2)
   for _,oId in pairs(objectIds) do
 	local n = world.entityName(oId)
     local feedType = entity.configParameter("tamedParameters.feed", "animalfeed")
@@ -69,13 +77,13 @@ function feedState.findSeed(position)
       if match ~= nil then
         local oPos = world.entityPosition(oId)
 	    if entity.entityInSight(oId) then
-          return { targetId = oId, targetPosition = oPos }
+          return { targetId = oId, targetPosition = oPos, feedRange = feedRange }
         end
 	  end
     end
   end
 
-  objectIds = world.objectQuery(p1, p2, { callScript = "entity.configParameter", callScriptArgs = {"category"}, callScriptResult = "storage" })
+  objectIds = world.objectQuery(position, range, { callScript = "entity.configParameter", callScriptArgs = {"category"}, callScriptResult = "storage" })
 
   for _,oId in ipairs(objectIds) do
     if entity.entityInSight(oId) then
@@ -83,7 +91,7 @@ function feedState.findSeed(position)
       local feed = self.inv.matchInContainer(oId, {name = feedType})
       if feed ~= nil then
         local oPos = world.entityPosition(oId)
-        return { targetId = oId, targetPosition = oPos, isContainer = true }
+        return { targetId = oId, targetPosition = oPos, isContainer = true, feedRange = feedRange }
       end
     end
   end

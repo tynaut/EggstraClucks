@@ -1,0 +1,9 @@
+{
+  "__merge" : [],
+  "itemName" : "currentcornbundle",
+  "rarity" : "Common",
+  "inventoryIcon" : "currentcorn.png",
+  "description" : "Grows currentcorn, full of acid. Not good for fleshy creatures.",
+  "shortdescription" : "Currentcorn Bundle"
+}
+

@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "coralcreep", "count" : 5 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "coralcreepbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

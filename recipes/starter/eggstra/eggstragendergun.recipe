@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "money", "count" : 100 },
+    { "item" : "ironbar", "count" : 2 }
+  ],
+  "output" : {
+    "item" : "eggstrapheromonescanner",
+    "count" : 1
+  },
+  "groups" : [ "eggstra", "all", "other" ]
+}

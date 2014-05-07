@@ -1,0 +1,16 @@
+{
+  "projectileName" : "livestocktreatprojectile",
+  "physics" : "grenade",
+  "bounces" : 3,
+  "level" : 3,
+  "timeToLive" : 3,
+  "frames" : "tastytreat.png",
+  "animationCycle" : 5,
+  "frameNumber" : 1,
+  "power" : 0,
+  "universalDamage" : true,
+  "piercing" : false,
+  "damagePoly" : [ [-9, 0], [-6, -6], [0, -9], [6, -6], [9, 0], [6, 6], [0, 9], [-6, 6] ],
+  "damageKind" : "livestocktreat",
+  "damageType" : "ignoresdef"
+}

@@ -8,7 +8,7 @@
   ],
   "moneyRange" : [0, 0],
   "rewards" : [
-    [ ["eggstradiary1Codex", 1], [ "primedegg", 2] ]
+    [ ["eggstradiary1Codex", 1], [ "primedegg", 5] ]
   ],
   "planetMode" : "none",
   "questDungeons" : [ ],

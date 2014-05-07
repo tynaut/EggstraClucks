@@ -4,17 +4,24 @@
     "scripts" : [
       "/scripts/inventoryManager.lua",
       "/monsters/ground/feedState.lua",
+      "/monsters/ground/matingState.lua",
+      "/monsters/ground/birthState.lua",
       "/scripts/delegate.lua",
       "/scripts/creature.lua"
     ],
     "tamedParameters" : {
       "hunger" : 0.05,
-      "span" : 300,
-      "milkCost" : [50, 0],
+      "generations" : 7,
+      "stages" : [48, 172800],
+      "span" : 180,
+      "birthCost" : [100, 0],
+      "milkCost" : [25, 0],
+      "matingCost" : [25, 0],
+      "termLength" : 172800,
       "feedTime" : [3.0, 5.0],
-      "feedRange" : 3,
-      "feedCooldown" : 150,
-      "searchRange" : 20,
+      "feedRange" : 2.5,
+      "feedCooldown" : 180,
+      "searchRange" : 30,
       "cooldown" : 15,
       "feed" : ["animalfeed"]
     }

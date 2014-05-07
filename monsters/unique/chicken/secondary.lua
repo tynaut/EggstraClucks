@@ -9,7 +9,7 @@ function init(args)
     "fleeState",
     "dieState",
     "feedState",
-    "eggState"
+    "birthState"
   })
   self.state.leavingState = function(stateName)
     entity.setAnimationState("movement", "idle")
@@ -18,6 +18,19 @@ function init(args)
 
   entity.setAggressive(false)
   entity.setAnimationState("movement", "idle")
+end
+
+
+function main()
+  self.state.update(entity.dt())
+  self.sensors.clear()
+  if self.hunger then
+    local cost = entity.configParameter("tamedParameters.birthCost", nil)
+    if cost == nil then return nil end
+    if self.hunger and cost[1] and cost[1] > self.hunger then return nil end
+    if self.thirst and cost[2] and cost[2] > self.thirst then return nil end
+    creature.isPregnant(1)
+  end
 end
 -------------------------------------------------
 function move(direction)
@@ -37,58 +50,6 @@ function cageCreature(destroy)
   return true
 end
 -------------------------------------------------
-eggState = {}
--------------------------------------------------
-function eggState.enter()
-  local birth = creature.birth()
-  if birth then
-    local nest = eggState.findNest(entity.position())
-    return {
-      targetId = nest.targetId,
-      targetPosition = nest.targetPosition,
-      timer = entity.randomizeParameterRange("tamedParameters.birthTime")
-    }
-  end
-  return nil,entity.configParameter("tamedParameters.cooldown", 10)
-end
--------------------------------------------------
-function eggState.update(dt, stateData)
-  stateData.timer = stateData.timer - dt
-  
-  local position = entity.position()
-  local toTarget = world.distance(stateData.targetPosition, position)
-  local distance = world.magnitude(toTarget)
-  
-  if distance <= entity.configParameter("tamedParameters.feedRange") then
-    --TODO make chicken sit for eggs!
-    entity.setAnimationState("movement", "idle")
-    if stateData.timer < 0 then
-      local egg = "egg"
-      if math.random(1000) > 995 then egg = "goldenegg" end
-      if stateData.targetId == nil or not self.inv.putInContainer(stateData.targetId, {name = egg, count = 1}) then
-        world.spawnItem(egg, position, 1)      
-      end
-      return true,entity.configParameter("tamedParameters.cooldown", 10)
-    end
-  else
-    entity.setAnimationState("movement", "move")
-    move(util.toDirection(toTarget[1]))
-  end
-  
+function hasTarget()
   return false
-end
-
-function eggState.findNest(position)
-  local range = entity.facingDirection() * entity.configParameter("tamedParameters.searchRange", 15.0)
-  local p1 = {position[1] + range, position[2]}
-  local p2 = {position[1] - range, position[2]}
-  local objectIds = world.objectQuery(position, entity.configParameter("tamedParameters.searchRange", 15.0), { callScript = "entity.configParameter", callScriptArgs = {"objectName"}, callScriptResult = "chickennest" })
-  for _,oId in ipairs(objectIds) do
-    if entity.entityInSight(oId) then
-        local oPos = world.entityPosition(oId)
-        return { targetId = oId, targetPosition = oPos}
-    end
-  end
-  
-  return {targetPosition = position}
 end

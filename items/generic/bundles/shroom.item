@@ -1,0 +1,11 @@
+{
+  "__merge" : [],
+  "itemName" : "shroombundle",
+  "rarity" : "Common",
+  "inventoryIcon" : "shroom.png",
+  "description" : "A mushroom. With a blueprint I could build something out of this..",
+  "shortdescription" : "Mushroom",
+  "learnBlueprintsOnPickup" : [
+    "shroomblock"
+  ]
+}

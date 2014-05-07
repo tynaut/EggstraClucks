@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "feathercrown", "count" : 5 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "feathercrownbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

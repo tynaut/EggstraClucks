@@ -1,0 +1,20 @@
+{
+  "itemName" : "eggstratastytreat",
+  "rarity" : "Common",
+  "inventoryIcon" : "tastytreat.png",
+  "image" : "tastytreat.png",
+  "description" : "A tasty treat, to an animal.",
+  "shortdescription" : "Tasty Treat",
+  
+  "ammoUsage" : 1,
+
+  "edgeTrigger" : true,
+  "windupTime" : 0.0,
+  "cooldown" : 0.4,
+
+  "projectileType" : "livestocktreatprojectile",
+  "projectileConfig" : {
+    "speed" : 30,
+    "power" : 0
+  }
+}

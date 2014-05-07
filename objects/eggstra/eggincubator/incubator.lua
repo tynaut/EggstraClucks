@@ -6,10 +6,10 @@ function tick()
         if storage.incubationTime == nil then storage.incubationTime = os.time() end
         --TODO update time to config
         local hatchTime = 10800
+        if item.name == "primedegg" then hatchTime = hatchTime / 10 end
         local delta = os.time() - storage.incubationTime
         self.indicator = math.ceil( (delta / hatchTime) * 9)
-        if item.name == "primedegg" then hatchTime = hatchTime / 10 end
-        if delta > hatchTime then
+        if delta >= hatchTime then
           hatchEgg()
           indicator = 0
         end
@@ -41,6 +41,7 @@ function hatchEgg()
       parameters.persistent = true
 	  parameters.damageTeam = 0
       parameters.startTime = os.time()
+      parameters.damageTeamType = "friendly"
       world.spawnMonster("babychick", entity.position(), parameters)
     elseif item.name == "goldenegg" then
       world.spawnItem("money", entity.position(), 5000)

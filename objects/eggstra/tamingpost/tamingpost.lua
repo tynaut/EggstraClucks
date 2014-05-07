@@ -9,6 +9,7 @@ function main()
         local delta = os.time() - storage.incubationTime
         if delta > hatchTime then
           spawnTamed()
+          storage.incubationTime = nil
         end
     else
       storage.incubationTime = nil
@@ -35,7 +36,6 @@ function spawnTamed()
       local mtype = data[1]["type"]
       local p = entity.position()
       params.ownerUuid = nil
-      params.gender = math.random(0, 1)
       local mId = world.spawnMonster(mtype, {p[1], p[2] + 2}, params)
       if mId then
         world.containerTakeAt(container, 0)

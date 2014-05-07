@@ -43,7 +43,8 @@
   "autoCloseCooldown" : 3600,
   
   "sellable" : {
-    "filledchickencage" : 600,
-    "eggcarton" : 600
+    "filledchickencage" : 350,
+    "eggcarton" : 150,
+    "bundle" : 25
   }
 }

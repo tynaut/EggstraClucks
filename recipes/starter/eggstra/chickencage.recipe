@@ -7,5 +7,5 @@
     "item" : "chickencage",
     "count" : 1
   },
-  "groups" : [ "mod", "eggstra", "objects", "all" ]
+  "groups" : [ "mod", "eggstra", "tools", "all" ]
 }

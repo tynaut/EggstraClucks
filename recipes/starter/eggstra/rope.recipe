@@ -7,5 +7,5 @@
     "item" : "climbingrope",
     "count" : 1
   },
-  "groups" : [ "eggstra", "all", "other" ]
+  "groups" : [ "eggstra", "all", "tools" ]
 }

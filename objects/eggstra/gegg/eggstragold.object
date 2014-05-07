@@ -1,0 +1,31 @@
+{
+  "objectName" : "eggstragoldenegg",
+  "rarity" : "Common",
+  "category" : "decorative",
+  "price" : 10000,
+  "description" : "An elegant golden egg",
+  "shortdescription" : "Golden Egg",
+  "race" : "generic",
+
+  "apexDescription" : "An elegant golden egg.",
+  "avianDescription" : "An elegant golden egg.",
+  "floranDescription" : "An elegant golden egg.",
+  "glitchDescription" : "An elegant golden egg.",
+  "humanDescription" : "An elegant golden egg.",
+  "hylotlDescription" : "An elegant golden egg.",
+
+  "inventoryIcon" : "eggstragoldicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "eggstragold.png:<color>",
+
+      "imagePosition" : [0, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaces" : [ [0, 0] ],
+      "anchors" : [ "bottom" ]
+
+    }
+  ]
+}

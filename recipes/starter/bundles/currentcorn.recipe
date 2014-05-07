@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "currentcorn", "count" : 5 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "currentcornbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

@@ -21,16 +21,16 @@
   "humanDescription" : "I can use materials I've found here to farm.",
   "hylotlDescription" : "A chance to farm.",
 
-  "inventoryIcon" : "farmtoolsicon.png",
+  "inventoryIcon" : "eggstratableicon.png",
   "orientations" : [
     {
-      "dualImage" : "farmtools.png:<color>",
+      "dualImage" : "eggstratable.png:<color>",
 
-      "imagePosition" : [-16, 0],
+      "imagePosition" : [-8, 0],
       "frames" : 1,
       "animationCycle" : 1.0,
 
-      "spaceScan" : 0.1,
+      "spaces" : [ [0, 0], [0, 1], [-1, 0], [-1, 1], [1, 0], [1, 1], [2, 0], [2, 1] ],
       "anchors" : [ "bottom" ],
       "collision" : "platform"
 

@@ -3,16 +3,32 @@
   "particleEmitters" : {
     "female" : {
       "particles" : [
-        { "particle" : "pheromone1" },
-        { "particle" : "pheromone1" },
-        { "particle" : "pheromone1" },
-        { "particle" : "pheromone1" },
         { "particle" : "pheromone1" }
+      ]
+    },
+    "male" : {
+      "particles" : [
+        { "particle" : "pheromone2" }
+      ]
+    },
+    "hunger" : {
+      "particles" : [
+        { "particle" : "pheromone3" }
+      ]
+    },
+    "thirst" : {
+      "particles" : [
+        { "particle" : "pheromone4" }
       ]
     },
     "milking" : {
       "particles" : [
         { "particle" : "pheromone5" }
+      ]
+    },
+    "pregnant" : {
+      "particles" : [
+        { "particle" : "pheromone6" }
       ]
     }
   }

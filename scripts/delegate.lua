@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 delegate = {
-    v = 2,
+    v = 3,
     delegates = {},
     callbacks = {}
 }
@@ -10,42 +10,43 @@ delegate = {
 delegate.init = init
 function init(args)
     local result = delegate.triggerAll("preInit", args)
-    if result == nil then result = delegate.triggerAll("init", args) end
-    if result == nil and delegate.init ~= nil then delegate.init(args) end
-    if result == nil then delegate.triggerAll("postInit", args) end
+    if not result then result = delegate.triggerAll("init", args) end
+    if not result and delegate.init ~= nil then delegate.init(args) end
+    if not result then delegate.triggerAll("postInit", args) end
 end
 --------------------------------------------------------------------------------
 delegate.main = main
 function main()
     local result = delegate.triggerAll("preMain")
-    if result == nil then result = delegate.triggerAll("main") end
-    if result == nil and delegate.main ~= nil then delegate.main() end
+    if not result then result = delegate.triggerAll("main") end
+    if not result and delegate.main ~= nil then delegate.main() end
     if delegate.tick ~= nil then delegate.tick() end
-    if result == nil then result = delegate.triggerAll("postMain") end
+    if not result then result = delegate.triggerAll("postMain") end
 end
 --------------------------------------------------------------------------------
 delegate.die = die
 function die()
     local result = delegate.triggerAll("preDie")
-    if result == nil then result = delegate.triggerAll("die") end
-    if result == nil and delegate.die ~= nil then delegate.die() end
-    if result == nil then result = delegate.triggerAll("postDie") end
+    if not result then result = delegate.triggerAll("die") end
+    if not result and delegate.die ~= nil then delegate.die() end
+    if not result then result = delegate.triggerAll("postDie") end
 end
 --------------------------------------------------------------------------------
 delegate.damage = damage
 function damage(args)
     local result = delegate.triggerAll("preDamage", args)
-    if result == nil then result = delegate.triggerAll("damage", args) end
-    if result == nil and delegate.damage ~= nil then delegate.damage(args) end
-    if result == nil then result = delegate.triggerAll("postDamage", args) end
+    if not result then result = delegate.triggerAll("damage", args) end
+    if not result and delegate.damage ~= nil then delegate.damage(args) end
+    if not result then result = delegate.triggerAll("postDamage", args) end
 end
 --------------------------------------------------------------------------------
 delegate.interact = interact
 function interact(args)
     local result = delegate.triggerAll("preInteract", args)
-    if result == nil then result = delegate.triggerAll("interact", args) end
-    if result == nil and delegate.interact ~= nil then delegate.interact(args) end
-    if result == nil then result = delegate.triggerAll("postInteract", args) end
+    if not result then result = delegate.triggerAll("interact", args) end
+    if not result and delegate.interact ~= nil then delegate.interact(args) end
+    if not result then result = delegate.triggerAll("postInteract", args) end
+    return result
 end
 --------------------------------------------------------------------------------
 -- delegate functions
@@ -85,14 +86,19 @@ function delegate.delayCallback(targetName, functionName, args, delay)
 end
 --------------------------------------------------------------------------------
 function delegate.delayTick()
-    for i,call in ipairs(delegate.callbacks) do
-        if call.d <= 0 then
+    if delegate.ticking then return end
+    delegate.ticking = true
+    local i = 1
+    while i <= #delegate.callbacks do
+        if delegate.callbacks[i].d < 0 then
+            delegate.callback(delegate.callbacks[i].t, delegate.callbacks[i].f, delegate.callbacks[i].a)
             table.remove(delegate.callbacks, i)
-            delegate.callback(call.t, call.f, call.a)
         else
             delegate.callbacks[i].d = delegate.callbacks[i].d - entity.dt()
+            i = i + 1
         end
     end
     if next(delegate.callbacks) == nil then delegate.tick = nil end
+    delegate.ticking = false
 end
 --------------------------------------------------------------------------------

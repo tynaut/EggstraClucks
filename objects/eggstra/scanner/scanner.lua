@@ -14,7 +14,7 @@ function main()
         for _,mId in ipairs(mIds) do
           world.callScriptedEntity(mId, "creature.releasePheromone")
         end
-        self.cooldown = 1
+        self.cooldown = 0.1
     end
   end
 end

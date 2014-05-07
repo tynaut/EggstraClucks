@@ -1,0 +1,10 @@
+{
+  "input" : [
+    { "item" : "straw", "count" : 15 }
+  ],
+  "output" : {
+    "item" : "haypile",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

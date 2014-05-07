@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "reefpod", "count" : 5 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "reefpodbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

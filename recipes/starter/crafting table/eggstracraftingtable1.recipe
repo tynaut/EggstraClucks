@@ -1,6 +1,7 @@
 {
   "input" : [
-    { "item" : "darkwoodmaterial", "count" : 35 }
+    { "item" : "darkwoodmaterial", "count" : 15 },
+    { "item" : "ironbar", "count" : 10 }
   ],
   "output" : {
     "item" : "eggstracraftingtable1",

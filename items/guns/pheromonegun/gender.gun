@@ -1,0 +1,25 @@
+{
+  "itemName" : "eggstrapheromonescanner",
+  "inventoryIcon" : "gendericon.png",
+  "dropCollision" : [-8.0, -3.0, 8.0, 3.0],
+  "maxStack" : 1,
+  "rarity" : "Rare",
+  "description" : "A jolt of radiation to stimulate fluorescence in gender pheromones.",
+  "shortdescription" : "Compact Scanner",
+  "image" : "gender.png",
+  "handPosition" : [-3.5, -1],
+  "firePosition" : [20, 0],
+
+  "fireTime" : 0.1,
+  "twoHanded" : false,
+  "level" : 0,
+
+  "walkWhileFiring" : true,
+  
+  "projectileType" : "livestockpheromoneprojectile",
+  "projectile" : {
+    "speed" : 2,
+    "power" : 0,
+    "damageKind" : "livestockpheromonegender"
+  }
+}

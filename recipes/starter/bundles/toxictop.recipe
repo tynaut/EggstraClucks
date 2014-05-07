@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "toxictop", "count" : 5 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "toxictopbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

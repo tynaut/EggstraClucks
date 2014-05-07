@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "animalfeed", "count" : 1 },
+    { "item" : "sugar", "count" : 2 }
+  ],
+  "output" : {
+    "item" : "eggstratastytreat",
+    "count" : 3
+  },
+  "groups" : [ "mod", "eggstra", "tools", "all" ]
+}

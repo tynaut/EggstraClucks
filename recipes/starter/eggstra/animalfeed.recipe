@@ -8,5 +8,5 @@
     "item" : "animalfeed",
     "count" : 3
   },
-  "groups" : [ "mod", "eggstra", "objects", "all" ]
+  "groups" : [ "mod", "eggstra", "tools", "all" ]
 }

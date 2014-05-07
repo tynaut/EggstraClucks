@@ -1,0 +1,30 @@
+{
+  "__merge" : [],
+  "animatedParts" : {
+    "stateTypes" : {
+      "movement" : {
+        "states" : {
+          "walk" : {
+            "frames" : 4,
+            "cycle" : 0.5,
+            "mode" : "loop"
+          }
+        }
+      }
+    },
+
+    "parts" : {
+      "body" : {
+        "partStates" : {
+          "movement" : {
+            "walk" : {
+              "properties" : {
+                "image" : "<partImage>:move.<frame>"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

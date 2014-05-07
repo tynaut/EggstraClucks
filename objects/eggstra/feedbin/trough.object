@@ -1,0 +1,41 @@
+{
+  "objectName" : "eggstratrough",
+  "rarity" : "Common",
+  "objectType" : "container",
+
+  "category" : "storage",
+  "description" : "It's a trough for feeding livestock.",
+  "shortdescription" : "Trough",
+  "race" : "glitch",
+  "price" : 300,
+  "printable" : false,
+
+  "apexDescription" : "A wooden trough. It's empty.",
+  "avianDescription" : "An empty wooden container.",
+  "floranDescription" : "Floran ssmell food here.",
+  "glitchDescription" : "Identify. A trough used for feeding livestock. Many Glitch live entirely off the land.",
+  "humanDescription" : "One of those things used for feeding livestock. I forget its name.",
+  "hylotlDescription" : "Some kind of food container. Perhaps used for feeding animals.",
+
+  "inventoryIcon" : "troughicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "trough.png:<color>",
+
+      "imagePosition" : [-16, -8],
+      "frames" : 1,
+      "animationCycle" : 1.0,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+
+    }
+  ],
+
+  "openSounds" : [ "/sfx/objects/woodenbox_open.wav" ],
+  "closeSounds" : [ "/sfx/objects/woodenbox_close.wav" ],
+  "slotCount" : 9,
+  "uiConfig" : "/interface/chests/chest%slots%.config",
+  "frameCooldown" : 67,
+  "autoCloseCooldown" : 3600
+}

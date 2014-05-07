@@ -24,10 +24,12 @@
     "scriptDelta" : 5,
     
     "tamedParameters" : {
-      "stages" : 24,/*144,realtime*/
+      "stages" : [24, 172800],
       "span" : 300,
       "growthType" : "chicken"
     },
+    
+    "youth" : true,
 
     "metaBoundBox" : [-0.5, -0.5, 0.5, 0.5],
     "scale" : 1.0,

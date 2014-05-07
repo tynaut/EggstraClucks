@@ -22,11 +22,11 @@
     {
       "dualImage" : "feedbin1.png:default",
 
-      "imagePosition" : [0, 0],
+      "imagePosition" : [0, -8],
       "frames" : 1,
       "animationCycle" : 0.5,
 
-      "spaces" : [ [0, 0], [0, 1], [1, 0], [1, 1] ],
+      "spaces" : [ [0, 0], [0, -1], [1, 0], [1, -1] ],
       "anchors" : [ "bottom" ]
 
     }
