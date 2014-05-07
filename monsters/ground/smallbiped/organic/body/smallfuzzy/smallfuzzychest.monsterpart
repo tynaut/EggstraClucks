@@ -1,9 +1,0 @@
-{
-  "__merge" : [],
-  "parameters" : {
-    "tamedFibreType" : ["animalfibre"],
-    "tamedMilkType" : ["milk"],
-    "slaughterPool" : [{"name" : "leather", "count" : 1}]
-  }
-}
-

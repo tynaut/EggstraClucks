@@ -11,29 +11,5 @@
       "/scripts/delegate.lua",
       "/scripts/creature.lua"
     ] 
-  },
-  
-  "partParameterDescription" : {
-    "tamedParameters" : [ "merge", 
-      {
-        "hunger" : 0.05,
-        "generations" : 7,
-        "stages" : [48, 172800],
-        "span" : 180,
-        "birthCost" : [100, 0],
-        "matingCost" : [25, 0],
-        "milkCost" : [25, 0],
-        "termLength" : 172800,
-        "feedTime" : [3.0, 5.0],
-        "feedRange" : 2.5,
-        "feedCooldown" : 180,
-        "searchRange" : 30,
-        "cooldown" : 15
-      }
-    ],
-    "tamedFeedType" : [ "override", ["animalfeed"] ],
-    "tamedFibreType" : [ "merge", [] ],
-    "tamedMilkType" : [ "merge", [] ],
-    "slaughterPool" : [ "merge", [{"name" : "alienmeat", "count" : 2}] ]
   }
 }
