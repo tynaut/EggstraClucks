@@ -1,0 +1,8 @@
+{
+  "itemName" : "spaceyarn",
+  "rarity" : "Common",
+  "inventoryIcon" : "spaceyarn.png",
+  "image" : "spaceyarn.png",
+  "description" : "A ball of fancy space yarn.",
+  "shortdescription" : "Ball of Yarn"
+}

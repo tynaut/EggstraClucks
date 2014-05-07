@@ -1,0 +1,10 @@
+{
+  "input" : [
+    { "item" : "animalfibre", "count" : 10 }
+  ],
+  "output" : {
+    "item" : "spaceyarn",
+    "count" : 1
+  },
+  "groups" : ["mod", "spinningwheel", "material", "all" ]
+}
