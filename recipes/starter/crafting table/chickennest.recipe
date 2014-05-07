@@ -1,6 +1,7 @@
 {
   "input" : [
-    { "item" : "darkwoodmaterial", "count" : 15 }
+    { "item" : "darkwoodmaterial", "count" : 15 },
+    { "item" : "hay", "count" : 2 }
   ],
   "output" : {
     "item" : "chickennest",

@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra3.gearup",
+  "title" : "^#9be3d6;Empty Handed",
+  "text" : "Chickens will eat you out of house and home if you're not careful. Instead of feeding them seeds you can also make animal feed, a better use of resources. Start by ^green;crafting a ^orange;hand mill^white;.",
+  "completionText" : "Eggsellent. Find a place for that hand mill, you also might need some cobblestone.",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "handmill", 1] }
+  ],
+  "moneyRange" : [0, 0],
+  "rewards" : [
+    [ ["handmill", 1], [ "cobblestonematerial", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : "eggstra4.gearup"
+}

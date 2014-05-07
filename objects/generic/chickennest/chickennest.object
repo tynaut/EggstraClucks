@@ -8,6 +8,7 @@
   "description" : "A chicken nest.",
   "shortdescription" : "Chicken Nest",
   "race" : "generic",
+  "printable" : false,
 
   "apexDescription" : "A nest for eggs.",
   "avianDescription" : "A baby birdy home.",

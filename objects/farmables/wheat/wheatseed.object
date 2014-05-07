@@ -1,0 +1,47 @@
+{
+    "__merge" : [
+        ["overwrite", "interactionTransition"]
+    ],
+    "interactionTransition" : {
+        "2" : {
+          "dropOptions" : [
+            0.3,
+            [
+              {
+                "name" : "wheat",
+                "count" : 1
+              },
+              {
+                "name" : "wheatseed",
+                "count" : 1
+              },
+              {
+                "name" : "hay",
+                "count" : 1
+              }
+            ],
+            [
+              {
+                "name" : "wheatseed",
+                "count" : 1
+              },
+              {
+                "name" : "plantfibre",
+                "count" : 1
+              }
+            ],
+            [
+              {
+                "name" : "wheat",
+                "count" : 1
+              },
+              {
+                "name" : "hay",
+                "count" : 2
+              }
+            ]
+          ],
+          "command" : "die"
+        }
+    }
+}

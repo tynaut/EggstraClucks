@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra4.gearup",
+  "title" : "^#9be3d6;The Daily Grind",
+  "text" : "It takes a lot of work to make animal feed by hand. Now that you have a hand mill, you can use it to grind things like ^green;seeds, wheat, cobblestone, gravel,^white; and more. You'll need these to ^green;craft a bag of ^orange;animal feed^white;.",
+  "completionText" : "This is a much better way to feed your animals! Now all you need to do is wait for those eggs to hatch.",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "animalfeed", 1] }
+  ],
+  "moneyRange" : [0, 0],
+  "rewards" : [
+    [ ["animalfeed", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : ""
+}

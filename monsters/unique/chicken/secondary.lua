@@ -9,7 +9,8 @@ function init(args)
     "fleeState",
     "dieState",
     "feedState",
-    "eggState"
+    "eggState",
+    "storageState"
   })
   self.state.leavingState = function(stateName)
     entity.setAnimationState("movement", "idle")
@@ -17,6 +18,7 @@ function init(args)
   end
   
   self.inv = inventoryManager.create()
+  self.needForFeed = math.floor(entity.randomizeParameterRange("eggstra.needForFeed"))
 
   entity.setAggressive(false)
   entity.setAnimationState("movement", "idle")
@@ -35,7 +37,7 @@ function feedState.enter()
       isContainer = feed.isContainer
     }
   end
-  return nil,entity.configParameter("eggstra.feedCooldown", 10)
+  return nil,entity.configParameter("eggstra.cooldown", 10)
 end
 -------------------------------------------------
 function feedState.update(dt, stateData)
@@ -49,8 +51,9 @@ function feedState.update(dt, stateData)
     if stateData.timer < 0 then
       local r = nil
       if stateData.isContainer then
-        local seed = self.inv.matchInContainer(stateData.targetId, {name = "seed"})
-        r = self.inv.takeFromContainer(stateData.targetId, {name = seed, count = 1})
+        local feed = self.inv.matchInContainer(stateData.targetId, {name = "animalfeed"})
+        if feed == nil then feed = self.inv.matchInContainer(stateData.targetId, {name = "seed"}) end
+        r = self.inv.takeFromContainer(stateData.targetId, {name = feed, count = 1})
       else
         r = world.takeItemDrop(stateData.targetId, entity.id())
       end
@@ -58,12 +61,12 @@ function feedState.update(dt, stateData)
         if r.count ~= nil and r.count > 1 then
           world.spawnItem(r.name, stateData.targetPosition, r.count - 1)
         end
-        if storage.feedCount == nil then
-          storage.feedCount = 1
-        else
-          storage.feedCount = storage.feedCount + 1
+        if self.feedCount == nil then
+          self.feedCount = entity.configParameter("feedCount", 0)
+          self.startCount = self.feedCount
         end
-        return true,entity.configParameter("eggstra.cooldown", 10)
+        self.feedCount = self.feedCount + 1
+        return true,entity.configParameter("eggstra.feedCooldown", 10)
       end
     end
   else
@@ -83,7 +86,7 @@ function feedState.findSeed(position)
 	local n = world.entityName(oId)
 	local match = string.match(n, "seed")
 
-    if match ~= nil then
+    if n == "animalfeed" or match ~= nil then
       local oPos = world.entityPosition(oId)
 	  if entity.entityInSight(oId) then
         return { targetId = oId, targetPosition = oPos }
@@ -94,8 +97,9 @@ function feedState.findSeed(position)
   objectIds = world.objectQuery(p1, p2, { callScript = "entity.configParameter", callScriptArgs = {"category"}, callScriptResult = "storage" })
   for _,oId in ipairs(objectIds) do
     if entity.entityInSight(oId) then
-      seed = self.inv.matchInContainer(oId, {name = "seed"})
-      if seed ~= nil then
+      local feed = self.inv.matchInContainer(oId, {name = "animalfeed"})
+      if feed == nil then feed = self.inv.matchInContainer(oId, {name = "seed"}) end
+      if feed ~= nil then
         local oPos = world.entityPosition(oId)
         return { targetId = oId, targetPosition = oPos, isContainer = true }
       end
@@ -108,9 +112,11 @@ end
 eggState = {}
 -------------------------------------------------
 function eggState.enter()
-  local count = entity.randomizeParameterRange("eggstra.needForFeed")
-  if storage.feedCount ~= nil and storage.feedCount >= count then
-    storage.feedCount = storage.feedCount - count
+  if self.needForFeed == nil then self.needForFeed = 10 end
+  local count = self.needForFeed
+  if self.feedCount ~= nil and self.feedCount >= count then
+    self.feedCount = self.feedCount - count
+    if self.startCount then self.startCount = 0 end
     local nest = eggState.findNest(entity.position())
     return {
       targetId = nest.targetId,
@@ -162,4 +168,31 @@ function eggState.findNest(position)
   end
   
   return {}
+end
+-------------------------------------------------
+storageState = {}
+
+function storageState.enter()
+  if self.state.stateDesc() == "storageState" then return nil end
+  if self.feedCount and self.feedCount - self.startCount >= 3 then
+    entity.setAnimationState("movement", "invisible")
+    return {}
+  end
+  return nil,entity.configParameter("eggstra.cooldown", 10)
+end
+
+function storageState.update()
+  local animationState = entity.animationState("movement")
+  if animationState == "invisible" then
+    entity.setDropPool(nil)
+    local parameters = {}
+    parameters.persistent = true
+    parameters.damageTeam = 0
+    parameters.feedCount = self.feedCount
+    world.spawnMonster("chicken", entity.position(), parameters)
+    self.dead = true
+    return true
+  end
+
+  return false
 end

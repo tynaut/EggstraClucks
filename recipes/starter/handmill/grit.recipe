@@ -1,0 +1,10 @@
+{
+  "input" : [
+    { "item" : "grit", "count" : 3 }
+  ],
+  "output" : {
+    "item" : "sand",
+    "count" : 1
+  },
+  "groups" : [ "handmill", "all" ]
+}

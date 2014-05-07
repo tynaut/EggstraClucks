@@ -8,6 +8,7 @@
   "description" : "An egg incubator.",
   "shortdescription" : "Incubator",
   "race" : "generic",
+  "printable" : false,
 
   "apexDescription" : "An incubator for eggs.",
   "avianDescription" : "A baby birdy home.",

@@ -155,6 +155,7 @@ end
 function growState.update(dt, stateData)
   local animationState = entity.animationState("movement")
   if animationState == "invisible" then
+    entity.setDropPool(nil)
     local parameters = {}
     parameters.persistent = true
     parameters.damageTeam = 0

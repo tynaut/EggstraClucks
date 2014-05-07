@@ -8,9 +8,9 @@
   ],
   "moneyRange" : [0, 0],
   "rewards" : [
-    [ ["eggincubator", 1], [ "egg", 1] ]
+    [ ["eggincubator", 1], [ "primedegg", 1] ]
   ],
   "planetMode" : "none",
   "questDungeons" : [ ],
-  "followUp" : ""
+  "followUp" : "eggstra2.gearup"
 }

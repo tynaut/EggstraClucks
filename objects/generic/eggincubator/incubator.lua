@@ -3,10 +3,12 @@ function main()
     local container = entity.id()
     local count = 0
     local item = world.containerItemAt(container, 0)
-    if item and (item.name == "egg" or item.name == "goldenegg") then
+    if canHatch(item) then
         if storage.incubationTime == nil then storage.incubationTime = os.time() end
         --TODO update time to config
-        if os.time() - storage.incubationTime > 1800 then hatchEgg() end
+        local hatchTime = 10800
+        if item.name == "primedegg" then hatchTime = hatchTime / 10 end
+        if os.time() - storage.incubationTime > hatchTime then hatchEgg() end
     else
       storage.incubationTime = nil
     end
@@ -20,11 +22,19 @@ function main()
   end
 end
 
+function canHatch(item)
+  if item == nil then return false end
+  if item.name == "egg" then return true end
+  if item.name == "primedegg" then return true end
+  if item.name == "goldenegg" then return true end  
+  return false
+end
+
 function hatchEgg()
   local container = entity.id()
   local item = world.containerTakeNumItemsAt(container, 0, 1)
   if item then
-    if item.name == "egg" then
+    if item.name == "egg" or "primedegg" then
       local parameters = {}
       parameters.persistent = true
 	  parameters.damageTeam = 0

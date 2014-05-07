@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "groundfeed", "count" : 1 }
+  ],
+  "output" : {
+    "item" : "plantfibre",
+    "count" : 1
+  },
+  "groups" : [ "handmill", "all" ]
+}
+

@@ -1,0 +1,8 @@
+{
+  "__merge" : [],
+  "itemName" : "animalfeed",
+  "rarity" : "Common",
+  "inventoryIcon" : "feed.png",
+  "description" : "Bag of animal feed, used to feed animals.",
+  "shortdescription" : "Feed"
+}

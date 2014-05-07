@@ -5,7 +5,7 @@ function main()
     if item and item.name == "egg" then
         if storage.incubationTime == nil then storage.incubationTime = os.time() end
         --TODO update time to config
-        if os.time() - storage.incubationTime > 3600 then hatchEgg() end
+        if os.time() - storage.incubationTime > 21600 then hatchEgg() end
     else
       storage.incubationTime = nil
     end

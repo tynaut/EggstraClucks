@@ -8,6 +8,7 @@
   "description" : "A wooden feed bin.",
   "shortdescription" : "Feed Bin",
   "race" : "generic",
+  "printable" : false,
 
   "apexDescription" : "A wooden feed bin.",
   "avianDescription" : "A feed bin made out of wood.",

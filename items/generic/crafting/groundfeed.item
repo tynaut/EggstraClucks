@@ -1,0 +1,8 @@
+{
+  "__merge" : [],
+  "itemName" : "groundfeed",
+  "rarity" : "Common",
+  "inventoryIcon" : "groundfeed.png",
+  "description" : "Finely ground feed.",
+  "shortdescription" : "Ground feed"
+}
