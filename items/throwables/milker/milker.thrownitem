@@ -2,7 +2,7 @@
   "itemName" : "eggstramilker",
   "inventoryIcon" : "milkericon.png",
   "maxStack" : 1,
-  "rarity" : "Rare",
+  "rarity" : "Common",
   "description" : "Some of these strange creatures must produce milk.",
   "shortdescription" : "Livestock Milker",
   "image" : "milker.png",
@@ -19,9 +19,10 @@
     "directional" : false
   },
   
-  "projectileType" : "livestockmilkingprojectile",
+  "projectileType" : "livestockresourceprojectile",
   "projectileConfig" : {
     "speed" : 5,
-    "power" : 0
+    "power" : 0,
+    "damageKind" : "livestockmilking"
   }
 }

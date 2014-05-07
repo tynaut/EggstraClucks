@@ -29,7 +29,7 @@ function main()
     if cost == nil then return nil end
     if self.hunger and cost[1] and cost[1] > self.hunger then return nil end
     if self.thirst and cost[2] and cost[2] > self.thirst then return nil end
-    creature.isPregnant(1)
+    creature.isPregnant({pregnant = 1})
   end
 end
 -------------------------------------------------

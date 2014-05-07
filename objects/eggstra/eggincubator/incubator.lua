@@ -11,7 +11,7 @@ function tick()
         self.indicator = math.ceil( (delta / hatchTime) * 9)
         if delta >= hatchTime then
           hatchEgg()
-          indicator = 0
+          self.indicator = 0
         end
     
         if self.indicator == nil then self.indicator = 0 end

@@ -74,9 +74,9 @@ function feedState.findSeed(position)
   local p1 = {position[1] - range, position[2] - 1}
   local p2 = {position[1] + range, position[2] + 1}
   local objectIds = world.itemDropQuery(position, range) --p1, p2)
+  if type(feedType) ~= "table" then feedType = {feedType} end
   for _,oId in pairs(objectIds) do
 	local n = world.entityName(oId)
-    if type(feedType) ~= "table" then feedType = {feedType} end
     for i,v in ipairs(feedType) do
 	  local match = string.find(n, v)
       if match ~= nil then
@@ -94,7 +94,7 @@ function feedState.findSeed(position)
     if entity.entityInSight(oId) then
       local feed = self.inv.matchInContainer(oId, {name = feedType})
       if feed ~= nil then
-        if entity.type() ~= "smallshroom" then
+        if entity.type() ~= "smallshroom" and entity.type() ~= "chicken" and math.random() < 0.5 then
           world.placeObject("poop", {position[1], position[2] - 2})
         end
         local oPos = world.entityPosition(oId)

@@ -1,0 +1,22 @@
+{
+  "itemName" : "eggstrafemalecowpod",
+  "rarity" : "Common",
+  "inventoryIcon" : "cattlepodicon.png",
+  "image" : "cattlepodicon.png",
+  "shortdescription" : "Female Cattle Pod",
+  "description" : "Throw it... Moo",
+
+  "maxStack" : 1,
+  "ammoUsage" : 1,
+
+  "edgeTrigger" : true,
+  "windupTime" : 0.0,
+  "cooldown" : 0.4,
+
+  "projectileType" : "filledcapturepod",
+  "projectileConfig" : {
+    "speed" : 70,
+    "level" : 7
+  }
+}
+

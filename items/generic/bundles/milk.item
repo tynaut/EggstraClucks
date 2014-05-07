@@ -1,0 +1,9 @@
+{
+  "__merge" : [],
+  "itemName" : "milkbundle",
+  "rarity" : "Common",
+  "inventoryIcon" : "milk.png",
+  "description" : "A large jug of milk, for selling.",
+  "shortdescription" : "Milk Jug"
+}
+

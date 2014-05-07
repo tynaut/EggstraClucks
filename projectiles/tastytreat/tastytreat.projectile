@@ -1,9 +1,9 @@
 {
   "projectileName" : "livestocktreatprojectile",
   "physics" : "grenade",
-  "bounces" : 3,
+  "bounces" : 4,
   "level" : 3,
-  "timeToLive" : 3,
+  "timeToLive" : 5,
   "frames" : "tastytreat.png",
   "animationCycle" : 5,
   "frameNumber" : 1,

@@ -1,0 +1,17 @@
+{
+  "name" : "hairybody",
+  "category" : "eggstrabovine",
+  "type" : "chest",
+
+  "frames" : {
+    "chest" : "body.png"
+  },
+  
+  "parameters" : {
+    "tamedResources" : {
+      "fibreType" : "animalfibre",
+      "milkType" : "milk",
+      "milkCost" : [25, 0]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "milk", "count" : 3 },
+    { "item" : "glassmaterial", "count" : 1}
+  ],
+  "output" : {
+    "item" : "milkbundle",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "other", "all" ]
+}

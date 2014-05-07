@@ -1,0 +1,16 @@
+{
+  "name" : "spotted2body",
+  "category" : "eggstrabovine",
+  "type" : "chest",
+
+  "frames" : {
+    "chest" : "body.png"
+  },
+  
+  "parameters" : {
+    "tamedResources" : {
+      "milkType" : "milk",
+      "milkCost" : [25, 0]
+    }
+  }
+}

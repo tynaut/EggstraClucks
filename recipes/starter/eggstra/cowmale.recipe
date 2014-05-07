@@ -1,0 +1,30 @@
+{
+  "input" : [
+    { "item" : "money", "count" : 5000 }
+  ],
+  "output" : {
+    "item" : "eggstramalecowpod",
+    "count" : 1,
+    "data" : {
+      "projectileConfig" : {
+        "speed" : 70,
+        "level" : 7,
+        "actionOnReap" : [
+          {
+            "action" : "spawnmonster",
+            "offset" : [0, 2],
+            "type" : "eggstrabovine",
+            "arguments" : {
+              "damageTeamType" : "friendly",
+              "persistent" : true,
+              "seed" : 313,
+              "level" : 1,
+              "gender" : 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

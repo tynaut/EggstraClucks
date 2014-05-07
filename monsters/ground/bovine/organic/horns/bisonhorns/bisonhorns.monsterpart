@@ -1,0 +1,9 @@
+{
+  "name" : "bisonhorns",
+  "category" : "eggstrabovine",
+  "type" : "horns",
+
+  "frames" : {
+    "horns" : "horns.png"
+  }
+}

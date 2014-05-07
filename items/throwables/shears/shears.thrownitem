@@ -1,0 +1,31 @@
+{
+  "itemName" : "eggstrashears",
+  "inventoryIcon" : "shearsicon.png",
+  "maxStack" : 1,
+  "rarity" : "Common",
+  "description" : "Removes everything above the skin.",
+  "shortdescription" : "Shears",
+  "image" : "shears.png",
+
+  "twoHanded" : false,
+
+  "ammoUsage" : 0,
+
+  "edgeTrigger" : false,
+  "windupTime" : 0.1,
+  "cooldown" : 1.0,
+  "primaryStances" : {
+    "handPosition" : [-5, -10],
+    "directional" : false,
+    "fireAfterWindup" : false,
+    "swingStart" : -90,
+    "swingFinish" : -90
+  },
+  
+  "projectileType" : "livestockresourceprojectile",
+  "projectileConfig" : {
+    "speed" : 5,
+    "power" : 0,
+    "damageKind" : "livestockshearing"
+  }
+}

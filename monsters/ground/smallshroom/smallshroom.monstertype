@@ -6,9 +6,11 @@
       "/monsters/ground/feedState.lua",
       "/monsters/ground/matingState.lua",
       "/monsters/ground/birthState.lua",
+      "/monsters/ground/beckonState.lua",
       "/scripts/delegate.lua",
       "/scripts/creature.lua"
     ],
+    
     "tamedParameters" : {
       "hunger" : 0.05,
       "generations" : 14,
@@ -24,5 +26,9 @@
       "cooldown" : 15,
       "feed" : ["plantfibre", "poop"]
     }
+  },
+  "partParameterDescription" : {
+    "__merge" : [],
+    "tamedResources" : [ "merge", {} ]
   }
 }

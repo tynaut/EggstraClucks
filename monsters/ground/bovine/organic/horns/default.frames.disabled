@@ -1,0 +1,46 @@
+{
+  "frameGrid" : {
+    "size" : [64, 32],
+    "dimensions" : [9, 3],
+
+    "names" : [
+      [ null, "idle.1", "invisible" ],
+      [ null, "walk.1.1", "walk.2.1", "walk.3.1", "walk.4.1", "walk.5.1", "walk.6.1", "walk.7.1", "walk.8.1" ],
+      [ null, "jump.1", null, "melee.1.1", "melee.2.1", "melee.3.1", "melee.4.1", null, "rotation.1" ]
+    ]
+  },
+  
+  "aliases" : {
+    "default" : "invisible",
+    "idle.default" : "invisible",
+    "walk.1.default" : "invisible",
+    "walk.2.default" : "invisible",
+    "walk.3.default" : "invisible",
+    "walk.4.default" : "invisible",
+    "walk.5.default" : "invisible",
+    "walk.6.default" : "invisible",
+    "walk.7.default" : "invisible",
+    "walk.8.default" : "invisible",
+    "jump.default" : "invisible",
+    "melee.1.default" : "invisible",
+    "melee.2.default" : "invisible",
+    "melee.3.default" : "invisible",
+    "melee.4.default" : "invisible",
+    "rotation.default" : "invisible",
+    "idle.0" : "invisible",
+    "walk.1.0" : "invisible",
+    "walk.2.0" : "invisible",
+    "walk.3.0" : "invisible",
+    "walk.4.0" : "invisible",
+    "walk.5.0" : "invisible",
+    "walk.6.0" : "invisible",
+    "walk.7.0" : "invisible",
+    "walk.8.0" : "invisible",
+    "jump.0" : "invisible",
+    "melee.1.0" : "invisible",
+    "melee.2.0" : "invisible",
+    "melee.3.0" : "invisible",
+    "melee.4.0" : "invisible",
+    "rotation.0" : "invisible"
+  }
+}

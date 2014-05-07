@@ -1,0 +1,16 @@
+{
+  "name" : "cattlelegs",
+  "category" : "eggstrabovine",
+  "type" : "legs",
+
+  "frames" : {
+    "frontLegs" : "cattleflegs.png",
+    "backLegs" : "cattleblegs.png"
+  },
+
+  "parameters" : {
+    "walkMultiplier" : 1.0,
+    "runMultiplier" : 1.0,
+    "jumpMultiplier" : 1.0
+  }
+}

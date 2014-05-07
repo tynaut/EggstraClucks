@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "straw", "count" : 1 },
+    { "item" : "poop", "count" : 2 }
+  ],
+  "output" : {
+    "item" : "drieddung",
+    "count" : 1
+  },
+  "groups" : [ "eggstra", "all", "tools" ]
+}

@@ -60,7 +60,12 @@ function matingState.findTarget(position)
   local range = entity.configParameter("tamedParameters.searchRange", 5.0)
   local p1 = {position[1] - range, position[2] - 1}
   local p2 = {position[1] + range, position[2] + 1}
-  local objectIds = world.monsterQuery(position, range, { callScript = "entity.seed", callScriptResult = entity.seed(), withoutEntityId = entity.id() })
+  local objectIds = nil
+  if entity.type() == "eggstrabovine" then
+    objectIds = world.monsterQuery(position, range, { callScript = "entity.type", callScriptResult = entity.type(), withoutEntityId = entity.id() })
+  else
+    objectIds = world.monsterQuery(position, range, { callScript = "entity.seed", callScriptResult = entity.seed(), withoutEntityId = entity.id() })
+  end
   for _,oId in pairs(objectIds) do
     if creature.canMate({targetId = oId}) then
       return oId

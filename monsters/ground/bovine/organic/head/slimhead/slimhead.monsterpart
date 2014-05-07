@@ -1,0 +1,19 @@
+{
+  "name" : "slimhead",
+  "category" : "eggstrabovine",
+  "type" : "head",
+
+  "frames" : {
+    "head" : "head.png"
+  },
+
+  "parameters" :
+  {
+    "projectileSourcePosition" : [1, -0.9],
+    "idleNoise" : [ "/sfx/npc/quadruped/horse_idle1.wav", "/sfx/npc/quadruped/goathead_attack1.wav" ],
+    "turnHostileNoise" : [ "/sfx/npc/quadruped/horse_turnhostile.wav" ],
+    "attackNoise" : [ "/sfx/npc/quadruped/horse_attack1.wav", "/sfx/npc/quadruped/goathead_attack2.wav" ],
+    "painNoise" : [ "/sfx/npc/quadruped/goathead_pain1.wav", "/sfx/npc/quadruped/goathead_pain2.wav" ],
+    "deathNoise" : [ "/sfx/npc/quadruped/goathead_death.wav" ]
+  }
+}

@@ -9,6 +9,12 @@
   
   "aliases" : {
     "default" : "default.0",
-    "default.default" : "default.0"
+    "default.default" : "default.0",
+    "default.10" : "default.0",
+    "default.11" : "default.0",
+    "default.12" : "default.0",
+    "default.13" : "default.0",
+    "default.14" : "default.0",
+    "default.15" : "default.0" 
   }
 }

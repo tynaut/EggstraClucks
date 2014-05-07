@@ -1,5 +1,5 @@
 {
-  "projectileName" : "livestockmilkingprojectile",
+  "projectileName" : "livestockresourceprojectile",
   "frames" : "milking.png",
   "animationCycle" : 2,
   "level" : 1,
@@ -12,6 +12,6 @@
   "bounces" : -1,
   "piercing" : true,
   "damagePoly" : [ [-9, 0], [-6, -6], [0, -9], [6, -6], [9, 0], [6, 6], [0, 9], [-6, 6] ],
-  "damageKind" : "livestockmilking",
+  "damageKind" : "default",
   "damageType" : "ignoresdef"
 }

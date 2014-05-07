@@ -30,6 +30,15 @@
       "particles" : [
         { "particle" : "pheromone6" }
       ]
+    },
+    "fur" : {
+      "particles" : [
+        { "particle" : "pheromone7" },
+        { "particle" : "pheromone7" },
+        { "particle" : "pheromone7" },
+        { "particle" : "pheromone7" },
+        { "particle" : "pheromone7" }
+      ]
     }
   }
 }

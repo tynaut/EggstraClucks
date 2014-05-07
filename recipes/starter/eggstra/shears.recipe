@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "ironbar", "count" : 2 },
+    { "item" : "money", "count" : 25 }
+  ],
+  "output" : {
+    "item" : "eggstrashears",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "tools", "all" ]
+}

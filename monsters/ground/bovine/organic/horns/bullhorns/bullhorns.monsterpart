@@ -1,0 +1,9 @@
+{
+  "name" : "bullhorns",
+  "category" : "eggstrabovine",
+  "type" : "horns",
+
+  "frames" : {
+    "horns" : "horns.png"
+  }
+}

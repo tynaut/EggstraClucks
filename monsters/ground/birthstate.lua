@@ -5,6 +5,7 @@ birthState = {
 -------------------------------------------------
 function birthState.enter()
   if hasTarget() then return nil end
+  if self.state.stateDesc() == "birthState" then return nil end
   
   if creature ~= nil then
     local isPregnant,t = creature.isPregnant()
@@ -27,7 +28,7 @@ function birthState.update(dt, stateData)
     entity.setAnimationState("movement", "idle")
     if stateData.timer < 0 then
       if stateData.birthItem then
-        if math.random(1000) > 995 then
+        if math.random() > 0.995 then
           local mutator = entity.configParameter("tamedParameters.mutator", "")
           stateData.birthItem = mutator .. stateData.birthItem
         end
@@ -48,9 +49,15 @@ function birthState.update(dt, stateData)
           params.movementSettings = bnds
           params.scale = birthState.scale
           params.generation = 1
+          if entity.type() == "eggstrabovine" then
+            if math.random() < 0.5 and self.pSeed then params.seed = self.pSeed end
+            if math.random() < 0.05 then params.seed = nil end
+          end
         end
         world.spawnMonster(params.type, entity.position(), params)
       end
+      creature.respawn = true
+      creature.despawn()
       return true,entity.configParameter("tamedParameters.cooldown", 10)
     end
   else

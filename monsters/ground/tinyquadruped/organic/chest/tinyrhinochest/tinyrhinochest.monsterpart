@@ -1,0 +1,10 @@
+{
+  "__merge" : [],
+  "parameters" : {
+    "tamedResources" : {
+      "milkType" : "milk",
+      "milkCost" : [25, 0]
+    }
+  }
+}
+

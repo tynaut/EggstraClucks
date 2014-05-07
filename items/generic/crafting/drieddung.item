@@ -1,0 +1,9 @@
+{
+  "__merge" : [],
+  "itemName" : "drieddung",
+  "rarity" : "Common",
+  "inventoryIcon" : "drieddung.png",
+  "description" : "Dried dung, a useful biofuel.",
+  "shortdescription" : "Dried dung",
+  "fuelAmount" : 2
+}
