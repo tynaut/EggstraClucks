@@ -1,6 +1,7 @@
 {
   "__merge" : [],
   "parameters" : {
+    "slaughterPool" : [{"name" : "monsterplating", "count" : 1}]
   }
 }
 

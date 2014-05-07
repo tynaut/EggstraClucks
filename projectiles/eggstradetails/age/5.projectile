@@ -1,0 +1,19 @@
+{
+  "projectileName" : "eggstradetailsage5",
+  "bounces" : -1,
+  "level" : 1,
+  "timeToLive" : 2.5,
+  "damageKindImage" : "icon.png",
+  "frames" : "icon.png",
+  "animationCycle" : 1,
+  "frameNumber" : 1,
+  "power" : 0,
+  "piercing" : true,
+  "damageKind" : "default",
+  "damageType" : "ignoresdef",
+  "orientationLocked" : true,
+  "damagePoly" : [ [1, 1], [0, 1], [0, 0], [1, 0] ],
+  "flippable" : false,
+  "universalDamage" : false,
+  "emitters" : [ "eggstraeffecta5" ]
+}

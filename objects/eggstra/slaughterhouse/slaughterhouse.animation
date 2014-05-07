@@ -1,0 +1,50 @@
+{
+  "animatedParts" : {
+    "stateTypes" : {
+      "slaughterState" : {
+        "priority" : 1,
+        "default" : "off",
+
+        "states" : {
+          "off" : {
+            "frames" : 1
+          },
+          "on" : {
+            "frames" : 1
+          }
+        }
+      }
+    },
+    "parts" : {
+      "house" : {
+        "properties" : {
+          "image" : "<partImage>",
+          "offset" : [0, 2.75],
+          "centered" : true,
+          "zLevel" : 1
+        }
+      }
+    }
+  },
+  
+  "particleEmitters" : {
+    "doors" : {
+      "particles" : [
+        {
+          "particle" : {
+            "type" : "animated",
+            "animation" : "/animations/slaughter/doors.animation",
+            "size" : 1,
+            "fade" : 1,
+            "destructionTime" : 0.5,
+            "position" : [0, 2.75],
+            "initialVelocity" : [0, 0],
+            "finalVelocity" : [0, 0],
+            "timeToLive" : 1.0,
+            "layer" : "front"
+          }
+        }
+      ]
+    }
+  }
+}

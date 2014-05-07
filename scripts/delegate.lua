@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 delegate = {
-    v = 3,
+    v = 4,
     delegates = {},
     callbacks = {}
 }
@@ -11,7 +11,7 @@ delegate.init = init
 function init(args)
     local result = delegate.triggerAll("preInit", args)
     if not result then result = delegate.triggerAll("init", args) end
-    if not result and delegate.init ~= nil then delegate.init(args) end
+    if not result and delegate.init ~= nil then result = delegate.init(args) end
     if not result then delegate.triggerAll("postInit", args) end
 end
 --------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ delegate.main = main
 function main()
     local result = delegate.triggerAll("preMain")
     if not result then result = delegate.triggerAll("main") end
-    if not result and delegate.main ~= nil then delegate.main() end
+    if not result and delegate.main ~= nil then result = delegate.main() end
     if delegate.tick ~= nil then delegate.tick() end
     if not result then result = delegate.triggerAll("postMain") end
 end
@@ -28,7 +28,7 @@ delegate.die = die
 function die()
     local result = delegate.triggerAll("preDie")
     if not result then result = delegate.triggerAll("die") end
-    if not result and delegate.die ~= nil then delegate.die() end
+    if not result and delegate.die ~= nil then result = delegate.die() end
     if not result then result = delegate.triggerAll("postDie") end
 end
 --------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ delegate.damage = damage
 function damage(args)
     local result = delegate.triggerAll("preDamage", args)
     if not result then result = delegate.triggerAll("damage", args) end
-    if not result and delegate.damage ~= nil then delegate.damage(args) end
+    if not result and delegate.damage ~= nil then result = delegate.damage(args) end
     if not result then result = delegate.triggerAll("postDamage", args) end
 end
 --------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ delegate.interact = interact
 function interact(args)
     local result = delegate.triggerAll("preInteract", args)
     if not result then result = delegate.triggerAll("interact", args) end
-    if not result and delegate.interact ~= nil then delegate.interact(args) end
+    if not result and delegate.interact ~= nil then result = delegate.interact(args) end
     if not result then result = delegate.triggerAll("postInteract", args) end
     return result
 end

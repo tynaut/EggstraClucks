@@ -1,10 +1,8 @@
 {
   "__merge" : [],
   "parameters" : {
-    "tamedResources" : {
-      "milkType" : "milk",
-      "milkCost" : [25, 0]
-    }
+    "tamedMilkType" : ["milk"],
+    "slaughterPool" : [{"name" : "leather", "count" : 1}]
   }
 }
 

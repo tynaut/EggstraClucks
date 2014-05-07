@@ -39,6 +39,12 @@
         { "particle" : "pheromone7" },
         { "particle" : "pheromone7" }
       ]
+    },
+    "slaughter" : {
+      "emissionRate" : 60,
+      "particles" : [
+        { "particle" : "eggstraparticleslaughter" }
+      ]
     }
   }
 }

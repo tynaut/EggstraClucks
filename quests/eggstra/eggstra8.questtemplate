@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra8.gearup",
+  "title" : "^#9be3d6;The Secret of Pheromones",
+  "text" : "Due to the complexity and variety of alien species, you may not always know what you're dealing with. We've sent you blueprints to ^green;craft a ^orange;Pheromone Scanner^white; that will help you detect ^green;pheromones^white;. Once you set it up and turn it on, you'll be able to see animal ^green;pheromones^white; that distinguish the males from the females. You may also be able to detect if a female is pregnant or milking.",
+  "completionText" : "Now you should be able to breed creatures, and build some equipment to get resources from your livestock.",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "eggstrascanner", 1] }
+  ],
+  "moneyRange" : [0, 0],
+  "rewards" : [
+    [ [ "eggstrascanner", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : "eggstra9.gearup"
+}

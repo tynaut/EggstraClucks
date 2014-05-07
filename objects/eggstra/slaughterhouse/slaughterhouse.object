@@ -1,0 +1,41 @@
+{
+  "objectName" : "eggstraslaughterhouse",
+  "rarity" : "Common",
+  "description" : "A small little shack where animals become food.",
+  "shortdescription" : "The Beef Barn",
+  "race" : "generic",
+  "category" : "decorative",
+  "price" : 250,
+
+  "apexDescription" : "A slaughterhouse. Anything hidden inside?",
+  "avianDescription" : "Nothing foul about this.",
+  "floranDescription" : "Dinner time!",
+  "glitchDescription" : "Descriptive. Smells of alien flesh.",
+  "humanDescription" : "It's meat. Are you a vegetarian?",
+  "hylotlDescription" : "I should burn it down.",
+
+  "inventoryIcon" : "slaughterhouseicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "slaughterhouse.png:<color>",
+
+      "imagePosition" : [-28, 0],
+      "frames" : 1,
+      "animationCycle" : 1.0,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+
+    }
+  ],
+  "animation" : "slaughterhouse.animation",
+  "animationParts" : {
+    "house" : "slaughterhouse.png"
+  },
+  "animationPosition" : [0, 0],
+  
+  "scripts" : [
+    "/scripts/vec2.lua",
+    "/objects/eggstra/slaughterhouse/slaughterhouse.lua"
+  ]
+}

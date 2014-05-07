@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra9.gearup",
+  "title" : "^#9be3d6;Spreading Misinformation",
+  "text" : "Those first two diaries you retrieved may have had some basic tips on starting up your farm, but unfortunately Mr. Ecks became ill as he was writing. His later diaries read more like a fantasy story, in which he imagined things that never really happened. We'd hate it if these stories mislead any potential new comers to false ideas about a lovely farm lifestyle. If you should come across any more of his work please drop them off in the bin so we can dispose of them.",
+  "completionText" : "Wonderful, we don't need copies of this circulating around and giving out the wrong ideas!",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "eggstradiary3Codex", 1] }
+  ],
+  "moneyRange" : [100, 200],
+  "rewards" : [
+    [ ["eggstradiary3Codex", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : "eggstra10.gearup"
+}

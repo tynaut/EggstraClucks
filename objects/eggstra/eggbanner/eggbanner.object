@@ -1,0 +1,31 @@
+{
+  "objectName" : "eggstrabanner",
+  "rarity" : "Common",
+  "category" : "decorative",
+  "price" : 300,
+
+  "description" : "An extra special banner made of gorgeous wool.",
+  "shortdescription" : "Egg Banner",
+  "race" : "generic",
+
+  "apexDescription" : "An image of myth and legend.",
+  "avianDescription" : "It reminds me of my youth.",
+  "floranDescription" : "Lookss tassty.",
+  "glitchDescription" : "Amazed. Golden Eggs.",
+  "humanDescription" : "I found an egg!",
+  "hylotlDescription" : "Such a symbol of life.",
+
+  "inventoryIcon" : "eggbannericon.png",
+  "orientations" : [
+    {
+      "image" : "eggbanner.png:<color>",
+      "imagePosition" : [-8, -24],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaceScan" : 0.1,
+      "bgAnchors" : [ [0, 0], [-1, 0] ]
+
+    }
+  ]
+}

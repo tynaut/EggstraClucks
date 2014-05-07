@@ -1,0 +1,52 @@
+{
+  "__merge" : [],
+  "partParameterDescription" : {
+    "tamedParameters" : [ "merge", 
+      {
+        "hunger" : 0.05,
+        "generations" : 7,
+        "stages" : [48, 172800],
+        "span" : 180,
+        "birthCost" : [100, 0],
+        "matingCost" : [25, 0],
+        "milkCost" : [25, 0],
+        "termLength" : 172800,
+        "feedTime" : [3.0, 5.0],
+        "feedRange" : 2.5,
+        "feedCooldown" : 180,
+        "searchRange" : 30,
+        "cooldown" : 15
+      }
+    ],
+    "tamedFeedType" : [ "override", ["animalfeed"] ],
+    "tamedFibreType" : [ "merge", [] ],
+    "tamedMilkType" : [ "merge", [] ],
+    "slaughterPool" : [ "merge", [{"name" : "alienmeat", "count" : 2}] ]
+  },
+  "partParameters" : {
+    "tinybeastspiderlegs" : { "tamedMilkType" : ["silk"] },
+    "tinyarchchest" : { "tamedMilkType" : ["milk"], "slaughterPool" : [{"name" : "leather", "count" : 1}] },
+    "tinyarchspikechest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyarchblade1chest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyarchblade2chest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyarchbulbchest" : {},
+    "tinyarchforkedchest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyfuzzychest" : {
+      "tamedFibreType" : ["animalfibre"], "tamedMilkType" : ["milk"], "slaughterPool" : [{"name" : "leather", "count" : 1}]
+    },
+    "tinygatorchest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinygorillachest" : {
+      "tamedFibreType" : ["animalfibre"], "tamedMilkType" : ["milk"], "slaughterPool" : [{"name" : "leather", "count" : 1}]
+    },
+    "tinylightningchargechest" : {},
+    "tinyneonsegmentchest" : {},
+    "tinyplatechest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyrexchest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyrhinochest" : { "tamedMilkType" : ["milk"], "slaughterPool" : [{"name" : "leather", "count" : 1}] },
+    "tinyspineplatechest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinytortoisechest" : {"slaughterPool" : [{"name" : "monsterplating", "count" : 1}]},
+    "tinyvolcanochest" : {},
+    "tinywart1chest" : {"slaughterPool" : [{"name" : "leather", "count" : 1}]},
+    "tinywart2chest" : {"slaughterPool" : [{"name" : "leather", "count" : 1}]}
+  }
+}

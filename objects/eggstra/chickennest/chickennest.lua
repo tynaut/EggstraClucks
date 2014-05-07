@@ -1,4 +1,4 @@
-function tick()
+function main()
   if entity.id() then
     local container = entity.id()
     local item = world.containerItemAt(container, 0)

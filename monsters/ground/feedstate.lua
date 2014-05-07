@@ -39,7 +39,7 @@ function feedState.update(dt, stateData)
     if stateData.timer < 0 then
       local r = nil
       if stateData.feedType == 1 then
-        local feedType = entity.configParameter("tamedParameters.feed", "animalfeed")
+        local feedType = entity.configParameter("tamedFeedType", {"animalfeed"})
         local feed = self.inv.matchInContainer(stateData.targetId, {name = feedType})
         if feed then r = self.inv.takeFromContainer(stateData.targetId, {name = feed.name, count = 1}) end
       elseif stateData.feedType == 2 then
@@ -68,7 +68,7 @@ function feedState.update(dt, stateData)
 end
 -------------------------------------------------
 function feedState.findSeed(position)
-  local feedType = entity.configParameter("tamedParameters.feed", "animalfeed")
+  local feedType = entity.configParameter("tamedFeedType", {"animalfeed"})
   local feedRange = entity.configParameter("tamedParameters.feedRange", 2)
   local range = entity.configParameter("tamedParameters.searchRange", 5.0)
   local p1 = {position[1] - range, position[2] - 1}
@@ -81,6 +81,7 @@ function feedState.findSeed(position)
 	  local match = string.find(n, v)
       if match ~= nil then
         local oPos = world.entityPosition(oId)
+        oPos[2] = oPos[2] + 1
 	    if entity.entityInSight(oId) then
           return { targetId = oId, targetPosition = oPos, feedType = 0, feedRange = feedRange }
         end
@@ -95,9 +96,10 @@ function feedState.findSeed(position)
       local feed = self.inv.matchInContainer(oId, {name = feedType})
       if feed ~= nil then
         if entity.type() ~= "smallshroom" and entity.type() ~= "chicken" and math.random() < 0.5 then
-          world.placeObject("poop", {position[1], position[2] - 2})
+          --world.placeObject("poop", {position[1], position[2] - 2})
         end
         local oPos = world.entityPosition(oId)
+        oPos[2] = oPos[2] + 1
         return { targetId = oId, targetPosition = oPos, feedType = 1, feedRange = feedRange }
       end
     end
@@ -108,6 +110,7 @@ function feedState.findSeed(position)
     for _,oId in ipairs(objectIds) do
       if entity.entityInSight(oId) then
         local oPos = world.entityPosition(oId)
+        oPos[2] = oPos[2] + 1
         return { targetId = oId, targetPosition = oPos, feedType = 2, feedRange = feedRange }
       end
     end

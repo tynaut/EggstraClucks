@@ -41,6 +41,7 @@
     "/objects/eggstra/bin.lua",
     "/objects/eggstra/chickennest/chickennest.lua"
   ],
+  "containerCallback" : "binInventoryChange",
   "scriptDelta" : 100,
   "binFrames" : 3,
 

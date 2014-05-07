@@ -20,8 +20,9 @@
       "feedCooldown" : 180,
       "searchRange" : 10,
       "cooldown" : 15,
-      "feed" : ["animalfeed", "seed"],
       "mutator" : "golden"
-    }
+    },
+    "tamedFeedType" : ["animalfeed", "seed"],
+    "tamedFibreType" : [ ]
   }
 }

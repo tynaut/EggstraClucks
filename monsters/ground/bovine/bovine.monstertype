@@ -3,6 +3,7 @@
 
   "categories" : [ "eggstrabovine" ],
   "parts" : [ "legs", "chest", "horns", "head" ],
+  "partParameters" : "bovine.partparams",
 
   "animation" : "bovine.animation",
   "projectiles" : "/monsters/projectiles.config",
@@ -29,27 +30,11 @@
       "/monsters/ground/matingState.lua",
       "/monsters/ground/birthState.lua",
       "/monsters/ground/beckonState.lua",
+      "/monsters/ground/slaughterState.lua",
       "/scripts/delegate.lua",
-      "/scripts/creature.lua",
-      "/scripts/helper.lua"
+      "/scripts/creature.lua"
     ],
     "scriptDelta" : 5,
-    
-    "tamedParameters" : {
-      "hunger" : 0.05,
-      "generations" : 7,
-      "stages" : [48, 172800],
-      "span" : 180,
-      "birthCost" : [100, 0],
-      "matingCost" : [25, 0],
-      "termLength" : 172800,
-      "feedTime" : [3.0, 5.0],
-      "feedRange" : 2.5,
-      "feedCooldown" : 180,
-      "searchRange" : 30,
-      "cooldown" : 15,
-      "feed" : ["animalfeed"]
-    },
     
     "territoryDistance" : 40.0,
     "territorialTargetRadius" : 20.0,
@@ -182,7 +167,7 @@
         } ]
     ]
   ],
-
+  
   "partParameterDescription" : {
     "weightMultiplier" : [ "multiply", 1.0],
     "walkMultiplier" : [ "multiply", 1.0],
@@ -194,10 +179,32 @@
     "attackNoise" : [ "merge", [ ] ],
     "painNoise" : [ "merge", [ ] ],
     "deathNoise" : [ "merge", [ ] ],
-    
-    "tamedResources" : [ "merge", {} ],
+
+    "baseSkills" : [ "merge", [ ] ],
+    "specialSkills" : [ "merge", [ ] ],
 
     "projectileSourcePosition" : [ "override", [2.0, 0] ],
-    "skills" : [ "merge", [ ] ]
+    
+    "tamedParameters" : [ "merge", 
+      {
+        "hunger" : 0.05,
+        "generations" : 7,
+        "stages" : [48, 172800],
+        "span" : 180,
+        "birthCost" : [100, 0],
+        "matingCost" : [25, 0],
+        "milkCost" : [25, 0],
+        "termLength" : 172800,
+        "feedTime" : [3.0, 5.0],
+        "feedRange" : 2.5,
+        "feedCooldown" : 180,
+        "searchRange" : 30,
+        "cooldown" : 15
+      }
+    ],
+    "tamedFeedType" : [ "override", ["animalfeed"] ],
+    "tamedFibreType" : [ "merge", [] ],
+    "tamedMilkType" : [ "merge", ["milk"] ],
+    "slaughterPool" : [ "merge", [{"name" : "alienmeat", "count" : 2}, {"name" : "leather", "count" : 1}] ]
   }
 }

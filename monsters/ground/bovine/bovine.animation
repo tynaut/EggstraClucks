@@ -527,6 +527,12 @@
         { "particle" : "pheromone7" }
       ]
     },
+    "slaughter" : {
+      "emissionRate" : 60,
+      "particles" : [
+        { "particle" : "eggstraparticleslaughter" }
+      ]
+    },
     
     "damage" : {
       "emissionRate" : 0.7,

@@ -1,0 +1,9 @@
+{
+  "kind" : "hiddendamage",
+  "damageNumberParticleKind" : {
+    "normal" : {
+      "hit" : "hiddendamagenumber",
+      "kill" : "hiddendamagenumber"
+    }
+  }
+}

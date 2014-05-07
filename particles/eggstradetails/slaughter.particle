@@ -1,0 +1,16 @@
+{
+  "kind" : "eggstraparticleslaughter",
+  "definition" : {
+    "type" : "animated",
+    "looping" : true,
+    "animation" : "/animations/eggstradetails/slaughter.animation",
+    "size" : 0.7,
+    "fade" : 1,
+    "position" : [0, 0],
+    "initialVelocity" : [0, 0],
+    "finalVelocity" : [0, 0],
+    "approach" : [0, 0],
+    "timeToLive" : 0.05,
+    "layer" : "front"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "itemName" : "advancedteleporter",
+  "rarity" : "Rare",
+  "inventoryIcon" : "advancedteleporter.png",
+  "description" : "An advanced, hand-held teleporter, Apex in design.",
+  "shortdescription" : "Advanced Teleporter",
+  "handPosition" : [8, 6],
+  "effects" : [ [
+      {
+        "kind" : "teleportdespawnstatus"
+      }
+    ] ],
+  "emote" : "",
+  "emitters" : [ "bandageuse" ]
+}

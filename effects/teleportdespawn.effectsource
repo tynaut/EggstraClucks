@@ -1,0 +1,29 @@
+{
+  "kind" : "teleportdespawneffect",
+  "definition" : {
+    "duration" : 0.05,
+    "loops" : true,
+    "start" : {
+      "particles" : [
+        [ ]
+      ],
+      "sounds" : [
+        [ "/sfx/statuseffects/powerup.wav" ]
+      ]
+    },
+    "particles" : [
+      [ "teleportdespawnparticle", "teleportdespawnparticle" ]
+    ],
+    "sounds" : [
+      [ ]
+    ],
+    "stop" : {
+      "particles" : [
+        [ ]
+      ],
+      "sounds" : [
+        [ ]
+      ]
+    }
+  }
+}

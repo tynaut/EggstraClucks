@@ -1,4 +1,4 @@
-function main()
+function binInventoryChange()
   if entity.id() then
     local container = entity.id()
     local frames = entity.configParameter("binFrames", 10) - 1
@@ -7,7 +7,6 @@ function main()
       self.fill = fill
       entity.setAnimationState("fillState", tostring(fill))
     end
-    if tick ~= nil then tick() end
   end
 end
 

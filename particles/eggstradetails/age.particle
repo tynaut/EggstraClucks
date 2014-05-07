@@ -1,0 +1,15 @@
+{
+  "kind" : "eggstraparticleage",
+  "definition" : {
+    "type" : "animated",
+    "animation" : "/animations/eggstradetails/age.animation",
+    "size" : 0.7,
+    "fade" : 1,
+    "position" : [0, 0],
+    "initialVelocity" : [0, 0],
+    "finalVelocity" : [0, 0],
+    "approach" : [0, 0],
+    "timeToLive" : 0.035,
+    "layer" : "front"
+  }
+}

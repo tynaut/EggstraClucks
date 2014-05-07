@@ -1,16 +1,16 @@
 {
   "id" : "eggstra7.gearup",
-  "title" : "^#9be3d6;Cheaters never Win",
-  "text" : "You're seeing this quest because you like to cheat. You should have waited till it was added in.",
-  "completionText" : "Eggs!",
+  "title" : "^#9be3d6;Finding Livestock",
+  "text" : "Do you have an interest in raising anything more than chickens? If you ^green;craft a ^orange;taming crate^white;, you'll be able to tame some critters and use them for milk, food, and breeding. Of course you'll also need a creature in a capture pod to tame!",
+  "completionText" : "Now all you need to do is place a ^green;filled capture pod^white; into the crate and start filling your farm with livestock.",
   "conditions" : [
-    { "kind" : "gather", "item" : [ "egg", 100] }
+    { "kind" : "gather", "item" : [ "tamingpost", 1] }
   ],
   "moneyRange" : [0, 0],
   "rewards" : [
-    [ ]
+    [ [ "tamingpost", 1] ]
   ],
   "planetMode" : "none",
   "questDungeons" : [ ],
-  "followUp" : ""
+  "followUp" : "eggstra8.gearup"
 }

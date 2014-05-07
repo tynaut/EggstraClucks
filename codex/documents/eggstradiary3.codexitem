@@ -1,0 +1,11 @@
+{
+  "codexId" : "eggstradiary3",
+  "title" : "Reading material",
+  "codexkind" : "codex",
+  "inventoryIcon" : "eggstradiary_03.png",
+  "image" : "eggstradiary_03.png",
+  "itemName" : "eggstradiary3Codex",
+  "rarity" : "common",
+  "description" : "A secondary guide to livestock farms, by Finley Ecks",
+  "shortdescription" : "The Harvest"
+}

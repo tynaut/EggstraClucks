@@ -43,6 +43,7 @@
     "/objects/eggstra/bin.lua",
     "/objects/eggstra/eggincubator/incubator.lua"
   ],
+  "containerCallback" : "binInventoryChange",
   "scriptDelta" : 60,
 
   "openSounds" : [ "/sfx/objects/woodenbox_open.wav" ],

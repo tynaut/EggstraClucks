@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "animalfibre", "count" : 10 }
+  ],
+  "output" : { "item" : "eggstrabanner", "count" : 1 },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

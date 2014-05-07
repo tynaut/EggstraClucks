@@ -1,0 +1,19 @@
+{
+  "kind" : "teleportdespawnstatus",
+  "duration" : 1,
+  "initialTick" : false,
+  "interval" : 0.9,
+  "primitives" : [
+    { "name" : "periodic" }
+  ],
+  "effectSources" : [ "teleportdespawneffect" ],
+  "tick" : {
+    "statusEffects" : [
+      {
+        "kind" : "directDamage",
+        "damageKind" : "hiddendamage",
+        "amount" : 100
+      }
+    ]
+  }
+}

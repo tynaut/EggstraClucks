@@ -3,6 +3,9 @@ creature = {
   starvation = false,
   oldage = false,
   realtime = true,
+  furTime = 720,
+  maxHunger = 150,
+  barTicks = 8,
   pheromones = {
     resource = 0.2,
     pregnancy = 0.5,
@@ -32,7 +35,9 @@ if delegate ~= nil then
       end
     end
   end
+  
   creature.damage = function(args)
+    if self.tparams == nil then return true end
     if args.sourceKind == "livestockmilking" then
       creature.milk()
       return true
@@ -46,7 +51,6 @@ if delegate ~= nil then
     elseif args.sourceKind == "livestocktreat" then
       self.hunger = self.hunger + 6
       if capturepod ~= nil and not capturepod.isCaptive() then
-        --delegate.delayCallback("creature", "beckon", {}, 7)
         creature.beckon({sourceId = args.sourceId})
       end
       return true
@@ -54,6 +58,7 @@ if delegate ~= nil then
       storage.ownerUuid = world.entityUuid(args.sourceId)
     end
   end
+  
   creature.die = function()
     if creature.respawn then
       entity.setDeathParticleBurst(nil)
@@ -85,9 +90,7 @@ function creature.uniqueParameters()
 end
 --------------------------------------------------------------------------------
 function creature.basicParameters()
-  if type(targetId) == "number" then
-    return world.callScriptedEntity(targetId, "creature.basicParameters")
-  elseif world.isMonster(entity.id()) then
+  if world.isMonster(entity.id()) then
     local params = {}
     params.aggressive = false
     params.persistent = true
@@ -106,6 +109,8 @@ function creature.despawn(targetId)
   if type(targetId) == "number" then
     return world.callScriptedEntity(targetId, "creature.despawn")
   elseif world.isMonster(entity.id()) then
+    creature.main = nil
+    creature.damage = nil
     local params = creature.uniqueParameters()
     entity.setDropPool(nil)
     self.dead = true
@@ -252,46 +257,6 @@ function creature.gender(targetId)
   return nil
 end
 --------------------------------------------------------------------------------
-function creature.releasePheromone(args)
-  if args and args.targetId then
-    return world.callScriptedEntity(args.targetId, "creature.releasePheromone", {pheromone = args.pheromone})
-  else
-    if args == nil or not args.pheromone then
-      args = {}
-      for t,r in pairs(creature.pheromones) do
-        if math.random() < r then args.pheromone = t;break end
-      end
-    end
-    
-    if args.pheromone == "gender" then
-      if creature.gender() == 0 then 
-        entity.burstParticleEmitter("female")
-      elseif creature.gender() > 0 then 
-        entity.burstParticleEmitter("male")
-      end
-    elseif args.pheromone == "resource" then
-      if creature.canMilk() then
-        entity.burstParticleEmitter("milking")
-      end
-      if creature.canShear() then
-        entity.burstParticleEmitter("fur")
-      end
-    elseif args.pheromone == "pregnancy" then
-      if creature.isPregnant() then
-        entity.burstParticleEmitter("pregnant")
-      end
-    elseif args.pheromone == "energy" then
-      if self.hunger and self.hunger < 10 then
-        entity.burstParticleEmitter("hunger")
-      end
-      if self.thirst and self.thirst < 10 then
-        entity.burstParticleEmitter("thirst")
-      end
-    end
-  end
-  return nil
-end
---------------------------------------------------------------------------------
 function creature.canMate(args)
   if type(args) ~= "table" then return end
   if args.sourceId then
@@ -302,7 +267,7 @@ function creature.canMate(args)
       local g2 = creature.gender(args.targetId)
       if g2 == 0 and creature.isPregnant({targetId = args.targetId}) then return false end
       if (g1 == 1 and g2 == 0) or (g1 == 2 and g2 == 2) then
-        local cost = entity.configParameter("tamedParameters.matingCost", nil)
+        local cost = self.tparams.matingCost
         if cost == nil then return false end
         if self.hunger and cost[1] and cost[1] > self.hunger then return false end
         if self.thirst and cost[2] and cost[2] > self.thirst then return false end
@@ -320,7 +285,7 @@ function creature.mate(args)
     return world.callScriptedEntity(args.sourceId, "creature.mate", {targetId = args.targetId})
   else
     if args.targetId then
-      local cost = entity.configParameter("tamedParameters.matingCost", nil)
+      local cost = self.tparams.matingCost
       if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
       if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
       if creature.gender(args.targetId) == 0 then
@@ -361,7 +326,7 @@ function creature.birth(targetId)
     return world.callScriptedEntity(targetId, "creature.birth")
   else
     --TODO check pregnant
-    local cost = entity.configParameter("tamedParameters.birthCost", {})--nil)
+    local cost = self.tparams.birthCost
     --if cost == nil then return nil end
     --if self.hunger and cost[1] and cost[1] > self.hunger then return nil end
     --if self.thirst and cost[2] and cost[2] > self.thirst then return nil end
@@ -369,7 +334,7 @@ function creature.birth(targetId)
     if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
     self.pregnant = -1
     return {
-      item = entity.configParameter("tamedParameters.birthItem", nil),
+      item = self.tparams.birthItem,
       count = 1
     }
   end
@@ -382,8 +347,9 @@ function creature.canMilk(targetId)
   elseif creature.isTamed() then
     local g = creature.gender()
     if g == 0 and not creature.isPregnant() then
-      local cost = entity.configParameter("tamedResources.milkCost", nil)
-      if cost == nil then return false end
+      local cost = self.tparams.milkCost
+      local milk = entity.randomizeParameter("tamedMilkType")
+      if cost == nil or milk == nil then return false end
       if self.hunger and cost[1] and cost[1] > self.hunger then return false end
       if self.thirst and cost[2] and cost[2] > self.thirst then return false end
       return true
@@ -398,15 +364,18 @@ function creature.milk(targetId)
     return world.callScriptedEntity(targetId, "creature.milk")
   elseif creature.isTamed() then
     if creature.canMilk() then
-      local cost = entity.configParameter("tamedResources.milkCost", nil)
-      local milk = entity.configParameter("tamedResources.milkType", nil)
+      local cost = self.tparams.milkCost
+      local milk = entity.randomizeParameter("tamedMilkType")
       if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
       if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
       if milk then
         world.spawnItem(milk, entity.position(), 1)
       end
+      creature.respawn = true
+      creature.despawn()
       return true
     end
+    creature.displayStatus()
     return false
   end
   return nil
@@ -416,8 +385,9 @@ function creature.canShear(targetId)
   if type(targetId) == "number" then
     return world.callScriptedEntity(targetId, "creature.canShear")
   elseif creature.isTamed() then
-    local count = math.floor((os.time() - self.furGrowth) / 100)
-    local fibre = entity.configParameter("tamedResources.fibreType", nil)
+    if self.furGrowth == nil then return false end
+    local count = math.floor((os.time() - self.furGrowth) / creature.furTime)
+    local fibre = entity.randomizeParameter("tamedFibreType")
     if fibre and count > 0 then return true end
     return false
   end
@@ -428,16 +398,142 @@ function creature.shear(targetId)
   if type(targetId) == "number" then
     return world.callScriptedEntity(targetId, "creature.shear")
   elseif creature.isTamed() then
-    local count = math.floor((os.time() - self.furGrowth) / 300)
-    local fibre = entity.configParameter("tamedResources.fibreType", nil)
-    if count > 5 then count = 5 end
-    if fibre and count > 0 then
+    if creature.canShear() then
+      local count = math.floor((os.time() - self.furGrowth) / creature.furTime)
+      local fibre = entity.randomizeParameter("tamedFibreType")
+      if count > 5 then count = 5 end
       world.spawnItem(fibre, entity.position(), count)
       self.furGrowth = os.time()
+      creature.respawn = true
+      creature.despawn()
+      return true
     else
       entity.burstParticleEmitter("fur")
+      creature.displayStatus()
+      return false
     end
+  end
+  return nil
+end
+--------------------------------------------------------------------------------
+function creature.slaughter(args)
+  if type(args) ~= "table" then return nil end
+  if args.stage == "begin" then
+    if args.sourceId and self.state then
+      creature.displayStatus()
+      return self.state.pickState({slaughterId = args.sourceId})
+    end
+  elseif args.stage == "release" then
+    if self.state and self.state.stateDesc() == "slaughterState" then
+      return self.state.endState()
+    end
+  elseif args.stage == "complete" then
+    local generation = math.abs(self.tparams.generations / 2 - entity.configParameter("generation", 2)) * 2 / self.tparams.generations
+    local hunger = self.hunger / creature.maxHunger
+    local primed = (hunger + generation) / 2
+    local slaughter = entity.configParameter("slaughterPool")
+    if slaughter ~= nil then
+      for i,v in ipairs(slaughter) do
+        local odds = math.random()
+        if i == 1 or odds < primed then
+          if v.name and v.count then
+            local count = math.floor((v.count * primed) + (1 - odds))
+            if i == 1 and count < 1 then count = 1 end
+            if count > 0 then world.spawnItem(v.name, entity.position(), count) end
+          end
+        end
+      end
+    end
+    creature.respawn = false
+    creature.despawn()
+    return true
+  end
+end
+--------------------------------------------------------------------------------
+function creature.releasePheromone(args)
+  if args and args.targetId then
+    return world.callScriptedEntity(args.targetId, "creature.releasePheromone", {pheromone = args.pheromone})
+  else
+    if args == nil or not args.pheromone then
+      args = {}
+      for t,r in pairs(creature.pheromones) do
+        if math.random() < r then args.pheromone = t;break end
+      end
+    end
+    
+    if args.pheromone == "gender" then
+      if creature.gender() == 0 then 
+        entity.burstParticleEmitter("female")
+      elseif creature.gender() > 0 then 
+        entity.burstParticleEmitter("male")
+      end
+    elseif args.pheromone == "resource" then
+      if creature.canMilk() then
+        entity.burstParticleEmitter("milking")
+      end
+      if creature.canShear() then
+        entity.burstParticleEmitter("fur")
+      end
+    elseif args.pheromone == "pregnancy" then
+      if creature.isPregnant() then
+        entity.burstParticleEmitter("pregnant")
+      end
+    elseif args.pheromone == "energy" then
+      if self.hunger and self.hunger < 10 then
+        entity.burstParticleEmitter("hunger")
+      end
+      if self.thirst and self.thirst < 10 then
+        entity.burstParticleEmitter("thirst")
+      end
+    end
+  end
+  return nil
+end
+--------------------------------------------------------------------------------
+function creature.displayStatus(targetId)
+  if type(targetId) == "number" then
+    return world.callScriptedEntity(targetId, "creature.shear")
+  elseif creature.isTamed() then
+    local generation = entity.configParameter("generation", 2) / self.tparams.generations
+    local hunger = self.hunger / creature.maxHunger
+    local p = entity.position()
+    local bounds = entity.configParameter("metaBoundBox")
+    if bounds then
+      p[1] = p[1] + bounds[1]/2
+      p[2] = p[2] + bounds[4]/2
+    end
+    creature.spawnStatusBar(generation, "age", p)
+    creature.spawnStatusBar(hunger, "hunger", {p[1] + 2, p[2]})
     return true
   end
   return nil
+end
+--------------------------------------------------------------------------------
+function creature.spawnStatusBar(v, t, p)
+  v = math.floor(v * creature.barTicks + 0.5)
+  if v > creature.barTicks then v = creature.barTicks end
+    local config = {
+        movementSettings = {
+          gravityMultiplier = 0.0,
+          bounceFactor = 0.0,
+          maxMovementPerStep = 0.0,
+          maximumCorrection = 0,
+
+          collisionPoly = { {0, 0}, {0, 0}, {0, 0}, {0, 0} },
+          ignorePlatformCollision = true,
+
+          airFriction = 0.0,
+          liquidFriction = 0.0
+        }
+    }
+    local tick = nil
+    if 0 < v then
+      tick = "eggstradetails" .. t .. v
+    else
+      tick = "eggstradetails"
+    end
+    if tick then
+      world.spawnProjectile("eggstradetails" .. t, {p[1], p[2]}, entity.id(), {0, 0}, true, config)
+      world.spawnProjectile(tick, {p[1]+0.7, p[2]}, entity.id(), {0, 0}, true, config)
+    end
 end

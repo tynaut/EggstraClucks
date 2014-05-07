@@ -1,0 +1,244 @@
+{
+  "type" : "eggstrashipper",
+  "baseType" : "merchant",
+
+  "damageTeam" : 1,
+  "levelVariance" : [0, 0],
+
+  "disableWornArmor" : true,
+  "inateStatusEffects" : [
+    {
+      "kind" : "Protection",
+      "amount" : 1.0
+    }
+  ],
+
+  "dropPools" : [ ],
+
+  "scripts" : [
+    "/npcs/main.lua",
+    "/npcs/timers.lua",
+    "/scripts/stateMachine.lua",
+    "/scripts/util.lua",
+    "/scripts/vec2.lua",
+    "/scripts/delegate.lua",
+
+    "/npcs/meleeAttackState.lua",
+    "/npcs/rangedAttackState.lua",
+    "/npcs/shipperpurchaseState.lua",
+
+    "/npcs/merchant/merchantState.lua",
+    
+    "/npcs/eggstrashipper.lua"
+  ],
+  "scriptDelta" : 5,
+  "scriptConfig" : {
+    "noticePlayersRadius" : 30.0,
+
+    "merchant" : {
+      "priceVarianceRange" : [1, 1],
+      "numItems" : 5,
+      "storeRadius" : -1
+    },
+
+    "dialog" : {
+      "start" : {
+        "default" : [
+          "Welcome to my shop.",
+          "See anything you like?",
+          "What can I do ya for?"
+        ],
+
+        "apex" : {
+          "default" : [
+            "I've got things the Miniknog would kill for.",
+            "You're not Miniknog are you? Goooooood.",
+            "Got more than just bananas, if you know what I mean."
+          ]
+        }
+      },
+      "end" : {
+        "default" : [
+          "Farewell, traveller.",
+          "Blessed be.",
+          "Courage to you!"
+        ],
+        "glitch" : {
+          "default" : [
+            "Deceptive. May you be forever blessed.",
+            "Sinister. Goodwill to you, traveller.",
+            "Insincere. May you have safe travels."
+          ]
+
+        }
+      }
+    },
+
+    "meleeAttack" : {
+      "swingDistance" : 5,
+      "swingTime" : 0.4,
+      "swingCooldownTime" : 0.6,
+      "switchDistance" : 15,
+      "runThreshold" : 0,
+      "searchTime" : 10,
+      "backoffDistanceRange" : [8.0, 12.0],
+      "repositionCooldownTimeRange" : [2.0, 3.0]
+    },
+
+    "rangedAttack" : {
+      "minDistance" : 10,
+      "maxDistance" : 30,
+      "coverYOffset" : -1.5,
+      "coverYClearanceOffset" : 0.5,
+      "coverDistance" : 2.5,
+      "coverHideTimeRange" : [0.5, 1.0],
+      "coverFireTimeRange" : [1.0, 3.0],
+      "attackerSpacing" : 2.5,
+      "searchTime" : 10
+    }
+  },
+  
+  "statusParameters" : {
+    "baseMaxHealth" : 40,
+    "baseMaxEnergy" : 40,
+    "bodyMaterialKind" : "organic",
+    "damageConfig" : "/damage/damageresponse/npcs.config",
+    "invulnerabilityTime" : 0,
+    "energyReplenishmentRate" : 10.0
+  },
+
+  "items" : {
+    "human" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ],
+    "avian" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ],
+    "apex" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ],
+    "floran" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ],
+    "glitch" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ],
+    "hylotl" : [
+      [0, [
+          {
+            "chest" : [ { "name" : "apexcommanderjacket", "data" : { "colorIndex" : 11 } } ],
+            "legs" : [ { "name" : "eggstrajacklegs", "data" : { "colorIndex" : 11 } } ],
+            "back" : [ { "name" : "simplecapeback", "data" : { "colorIndex" : 1 } } ],
+            "primary" : [
+              { "name" : "generatedsword", "data" : { "definition" : "commonspear" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonaxe" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonhammer" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonbroadsword" } },
+              { "name" : "generatedsword", "data" : { "definition" : "commonshortsword" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonassaultrifle" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonshotgun" } },
+              { "name" : "generatedgun", "data" : { "definition" : "commonsniperrifle" } }
+            ],
+            "alt" : [
+              { "name" : "generatedshield", "data" : { "definition" : "tier1shield" } }
+            ]
+          }
+        ] ]
+    ]
+  }
+}

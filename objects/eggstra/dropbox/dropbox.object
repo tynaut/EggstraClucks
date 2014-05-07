@@ -33,7 +33,7 @@
   "scripts" : [
     "/objects/eggstra/dropbox/dropbox.lua"
   ],
-  "scriptDelta" : 500,
+  "scriptDelta" : 5,
   
   "openSounds" : [ "/sfx/objects/chest_medium_open.wav" ],
   "closeSounds" : [ "/sfx/objects/chest_medium_close.wav" ],
@@ -45,6 +45,7 @@
   "sellable" : {
     "filledchickencage" : 350,
     "eggcarton" : 150,
-    "bundle" : 25
+    "bundle" : 25,
+    "eggstradiary2Codex" : 10
   }
 }
