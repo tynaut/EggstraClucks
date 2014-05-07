@@ -140,8 +140,9 @@ end
 growState = {}
 
 function growState.enter()
-  if storage.startTime == nil then storage.startTime = os.time() end
-  local age = os.time() - storage.startTime
+  self.startTime = entity.configParameter("startTime", 0)
+  if self.startTime == nil then self.startTime = os.time() end
+  local age = os.time() - self.startTime
   if self.state.stateDesc() == "growState" then return nil end
 
   if age > entity.configParameter("lifeSpan", 120) then

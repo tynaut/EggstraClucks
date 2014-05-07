@@ -74,7 +74,7 @@
 
     "moveTimeRange" : [1, 3.0],
     "cooldown" : 10.0,
-    "lifeSpan" : 3000,
+    "lifeSpan" : 3600,
 
     "fleeDistanceRange" : [10.0, 50.0],
     "fleeMaxTime" : 20.0

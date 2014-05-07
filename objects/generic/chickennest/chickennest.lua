@@ -1,21 +1,20 @@
 function main()
   if entity.id() then
     local container = entity.id()
-    local count = 0
     local item = world.containerItemAt(container, 0)
-    if item and (item.name == "egg" or item.name == "goldenegg") then
+    if item and item.name == "egg" then
         if storage.incubationTime == nil then storage.incubationTime = os.time() end
         --TODO update time to config
-        if os.time() - storage.incubationTime > 1800 then hatchEgg() end
+        if os.time() - storage.incubationTime > 3600 then hatchEgg() end
     else
       storage.incubationTime = nil
     end
     
-    if item ~= nil and item.count ~= nil then count = item.count end
-    local fill = math.ceil(count / 100)
+    local fill = "empty"
+    if item ~= nil and item.count ~= nil then fill = "egg" end
     if self.fill ~= fill then
       self.fill = fill
-      entity.setAnimationState("fill", tostring(fill))
+      entity.setAnimationState("fill", fill)
     end
   end
 end
@@ -30,8 +29,6 @@ function hatchEgg()
 	  parameters.damageTeam = 0
       parameters.startTime = os.time()
       world.spawnMonster("babychick", entity.position(), parameters)
-    elseif item.name == "goldenegg" then
-      world.spawnItem("money", entity.position(), 5000)
     end
   end
   storage.incubationTime = nil

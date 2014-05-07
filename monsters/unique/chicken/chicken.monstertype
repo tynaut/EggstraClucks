@@ -1,13 +1,16 @@
 {
   "__merge" : [],
   "baseParameters" : {
-    "scripts" : [ "/monsters/unique/chicken/secondary.lua" ],
+    "scripts" : [ 
+      "/scripts/inventoryManager.lua",
+      "/monsters/unique/chicken/secondary.lua"
+    ],
     "eggstra" : {
         "needForFeed" : [10, 15],
         "cooldown" : 10.0,
         "searchRange" : 10,
         "feedRange" : 1.5,
-        "feedTime" : [2.0, 3.0],
+        "feedTime" : [3.0, 5.0],
         "eggTime" : [3.0, 5.0]
     }
   }

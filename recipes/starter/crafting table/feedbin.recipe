@@ -1,0 +1,10 @@
+{
+  "input" : [
+    { "item" : "darkwoodmaterial", "count" : 10 }
+  ],
+  "output" : {
+    "item" : "feedbin1",
+    "count" : 1
+  },
+  "groups" : [ "mod", "craftingtable", "objects", "all" ]
+}
