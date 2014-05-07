@@ -11,18 +11,18 @@
     ],
     "tamedParameters" : {
       "hunger" : 0.05,
-      "generations" : 10,
+      "generations" : 14,
       "stages" : [48, 86400],
       "span" : 180,
       "birthCost" : [100, 0],
       "matingCost" : [25, 0],
       "termLength" : 86400,
       "feedTime" : [3.0, 5.0],
-      "feedRange" : 2.5,
-      "feedCooldown" : 180,
-      "searchRange" : 30,
+      "feedRange" : 3,
+      "feedCooldown" : 90,
+      "searchRange" : 20,
       "cooldown" : 15,
-      "feed" : ["plantfibre"]
+      "feed" : ["plantfibre", "poop"]
     }
   }
 }

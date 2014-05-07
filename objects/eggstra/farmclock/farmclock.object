@@ -19,7 +19,7 @@
   "orientations" : [
     {
       "dualImage" : "farmclock.png:<color>.1",
-      "imagePosition" : [-8, -8],
+      "imagePosition" : [-8, -12],
       "frames" : 8,
       "animationCycle" : 2,
 

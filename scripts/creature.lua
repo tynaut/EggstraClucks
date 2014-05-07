@@ -125,7 +125,7 @@ function creature.spawn()
   end
   if growth then
     local generation = entity.configParameter("generation", 2)
-    if generation == 1 then
+    if generation == 1 or self.tparams.growthType ~= nil then
       params = creature.basicParameters()
       params.generation = 2
       if self.tparams.growthType then
