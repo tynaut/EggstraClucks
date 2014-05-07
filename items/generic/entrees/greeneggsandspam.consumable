@@ -1,0 +1,19 @@
+{
+  "itemName" : "greeneggsandspam",
+  "rarity" : "Common",
+  "inventoryIcon" : "greeneggsandspam.png",
+  "description" : "I do not like spam.",
+  "shortdescription" : "Green Eggs and Spam",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 100
+      },
+      {
+        "kind" : "mollyhealing3" },
+      {
+        "kind" : "energy",
+        "amount" : 15
+      }
+    ] ]
+}

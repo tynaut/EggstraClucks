@@ -1,0 +1,18 @@
+{
+  "itemName" : "flan",
+  "rarity" : "Common",
+  "inventoryIcon" : "flan.png",
+  "description" : "Delicious flan!",
+  "shortdescription" : "Flan",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 100
+      },
+      {
+        "kind" : "mollyhealing3" },
+      {
+        "kind" : "sugarrush"
+      }
+    ] ]
+}

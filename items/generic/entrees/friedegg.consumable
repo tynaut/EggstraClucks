@@ -1,0 +1,20 @@
+{
+  "itemName" : "friedegg",
+  "rarity" : "Common",
+  "inventoryIcon" : "friedegg.png",
+  "description" : "It's an egg!",
+  "shortdescription" : "Fried Egg",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 50
+      },
+      {
+        "kind" : "mollyhealing1"
+      },
+      {
+        "kind" : "energy",
+        "amount" : 10
+      }
+    ] ]
+}

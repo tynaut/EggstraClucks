@@ -1,0 +1,16 @@
+{
+  "itemName" : "eggbasket",
+  "rarity" : "Common",
+  "inventoryIcon" : "eggbasket.png",
+  "description" : "It's an egg in the basket!",
+  "shortdescription" : "Egg in the Basket",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 70
+      },
+      {
+        "kind" : "mollyhealing1"
+      }
+    ] ]
+}

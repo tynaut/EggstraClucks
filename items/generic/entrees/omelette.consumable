@@ -1,0 +1,20 @@
+{
+  "itemName" : "omelette",
+  "rarity" : "Common",
+  "inventoryIcon" : "omelette.png",
+  "description" : "It's an egg!",
+  "shortdescription" : "Omelette",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 100
+      },
+      {
+        "kind" : "mollyhealing1"
+      },
+      {
+        "kind" : "energy",
+        "amount" : 10
+      }
+    ] ]
+}

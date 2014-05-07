@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "egg", "count" : 1 }
+  ],
+  "output" : { "item" : "poachedegg", "count" : 1 },
+  "groups" : [ "kitchen", "consumables", "entree" ]
+}

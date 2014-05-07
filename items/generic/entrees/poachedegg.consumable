@@ -1,0 +1,13 @@
+{
+  "itemName" : "poachedegg",
+  "rarity" : "Common",
+  "inventoryIcon" : "poachedegg.png",
+  "description" : "It's an egg, poached.",
+  "shortdescription" : "Poached Egg",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 35
+      }
+    ] ]
+}

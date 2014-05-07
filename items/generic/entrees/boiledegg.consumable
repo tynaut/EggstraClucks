@@ -1,0 +1,13 @@
+{
+  "itemName" : "boiledegg",
+  "rarity" : "Common",
+  "inventoryIcon" : "boiledegg.png",
+  "description" : "It's an egg, hard boiled.",
+  "shortdescription" : "Boiled Egg",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 35
+      }
+    ] ]
+}
