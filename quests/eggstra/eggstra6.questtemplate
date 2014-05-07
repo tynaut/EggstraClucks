@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra6.gearup",
+  "title" : "^#9be3d6;One Flew the Coop",
+  "text" : "Did you happen to read that diary you found? It was all a bunch of nonsense. We seem to have misplaced the second volume to it, if you happen to locate it, we would give you a nice reward.",
+  "completionText" : "Ah, just what we were looking for. Drop that off in the bin, no need to read it.",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "eggstradiary2Codex", 1] }
+  ],
+  "moneyRange" : [100, 200],
+  "rewards" : [
+    [ ["eggstradiary2Codex", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : "eggstra7.gearup"
+}

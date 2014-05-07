@@ -1,0 +1,43 @@
+{
+  "objectName" : "eggstrascanner",
+  "rarity" : "Common",
+  "objectType" : "wire",
+
+  "category" : "wire",
+  "price" : 500,
+  "description" : "This device causes livestock pheromones to fluoresce.",
+  "shortdescription" : "Pheromone Scanner",
+  "race" : "human",
+
+  "apexDescription" : "This device causes livestock pheromones to fluoresce.",
+  "avianDescription" : "This device causes livestock pheromones to fluoresce.",
+  "floranDescription" : "This device causes livestock pheromones to fluoresce.",
+  "glitchDescription" : "This device causes livestock pheromones to fluoresce.",
+  "humanDescription" : "This device causes livestock pheromones to fluoresce.",
+  "hylotlDescription" : "This device causes livestock pheromones to fluoresce.",
+
+  "inventoryIcon" : "scannericon.png",
+  "orientations" : [
+    {
+      "dualImage" : "scanner.png:<color>.off",
+      "imagePosition" : [-8, 0],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+    }
+  ],
+
+  "soundEffect" : "/sfx/objects/bunkerconsole.wav",
+
+  "scripts" : [ "/objects/eggstra/scanner/scanner.lua" ],
+  "scriptDelta" : 5,
+
+  "animation" : "/objects/wired/switch/switch4.animation",
+
+  "animationParts" : {
+    "switch" : "scanner.png"
+  },
+  "animationPosition" : [-8, 0],
+
+  "outboundNodes" : [ [0, 0] ]
+}

@@ -1,0 +1,13 @@
+{
+  "itemName" : "cookednugget",
+  "rarity" : "Common",
+  "inventoryIcon" : "cookednugget.png",
+  "description" : "A nice, roasted chick nugget.",
+  "shortdescription" : "Cooked Nugget",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 15
+      }
+    ] ]
+}

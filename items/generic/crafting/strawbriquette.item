@@ -1,0 +1,9 @@
+{
+  "__merge" : [],
+  "itemName" : "strawbriquette",
+  "rarity" : "Common",
+  "inventoryIcon" : "strawbriquette.png",
+  "description" : "A straw briquette, a useful source of fuel.",
+  "shortdescription" : "Straw Briquette",
+  "fuelAmount" : 2
+}

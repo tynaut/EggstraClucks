@@ -1,0 +1,11 @@
+{
+  "codexId" : "eggstradiary2",
+  "title" : "Reading material",
+  "codexkind" : "codex",
+  "inventoryIcon" : "eggstradiary_02.png",
+  "image" : "eggstradiary_02.png",
+  "itemName" : "eggstradiary2Codex",
+  "rarity" : "common",
+  "description" : "A secondary guide to livestock farms, by Finley Ecks",
+  "shortdescription" : "Got Milk?"
+}

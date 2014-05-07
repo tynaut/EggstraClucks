@@ -1,14 +1,14 @@
 {
   "id" : "eggstra2.gearup",
   "title" : "^#9be3d6;Eggstremely Hungry",
-  "text" : "You are off to a good start making a chicken farm, but don't you think they will get hungry? Maybe you should ^green;craft your first ^orange;feed bin^white; to store food for the chickens.",
+  "text" : "Did you build that incubator yet? You are off to a good start making a chicken farm, but don't you think they will get hungry? Maybe you should ^green;craft your first ^orange;feed bin^white; to store food for the chickens.",
   "completionText" : "Keep going. Put some seeds into the bin and let the chickens eat.",
   "conditions" : [
     { "kind" : "gather", "item" : [ "feedbin1", 1] }
   ],
   "moneyRange" : [0, 0],
   "rewards" : [
-    [ ["feedbin1", 1], [ "wheatseed", 1] ]
+    [ ["feedbin1", 1], [ "wheatseed", 2] ]
   ],
   "planetMode" : "none",
   "questDungeons" : [ ],

@@ -1,0 +1,10 @@
+{
+  "input" : [
+    { "item" : "darkwoodmaterial", "count" : 30 }
+  ],
+  "output" : {
+    "item" : "eggstradropbox",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

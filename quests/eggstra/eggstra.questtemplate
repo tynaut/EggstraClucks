@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra.gearup",
+  "title" : "^#9be3d6;Eggstra Farmers Needed!",
+  "text" : "Do you have dreams of finding a quiet planet to settle on? A place to escape from the buzz of technology? A place to dig your fingers into the soil and start a farm? If this sounds like a dream come true, find a cozy spot and ^green;craft a ^orange;barn crafting table^white; to get started.",
+  "completionText" : "That looks handy. We're very excited about all the farm goods you could sell us in the future.",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "eggstracraftingtable1", 1] }
+  ],
+  "moneyRange" : [15, 15],
+  "rewards" : [
+    [ ["eggstracraftingtable1", 1] ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : "eggstra1.gearup"
+}

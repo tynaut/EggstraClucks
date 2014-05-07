@@ -1,0 +1,13 @@
+{
+  "itemName" : "rawnugget",
+  "rarity" : "Common",
+  "inventoryIcon" : "rawnugget.png",
+  "description" : "Raw chick nugget. Might wanna cook it first...",
+  "shortdescription" : "Raw Nugget",
+  "effects" : [ [
+      {
+        "kind" : "food",
+        "amount" : 5
+      }
+    ] ]
+}

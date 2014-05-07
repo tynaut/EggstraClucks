@@ -1,16 +1,16 @@
 {
   "id" : "eggstra5.gearup",
-  "title" : "^#9be3d6;One Flew the Coop",
-  "text" : "Do you have dreams of finding a quiet planet to settle on? A place to escape from the buzz of technology? A place to dig your fingers into the soil and start a farm? If this sounds like a dream come true, find a cozy spot and ^green;craft your first ^orange;egg incubator^white;. We'll send you an ^green;egg ^white;to get started.",
-  "completionText" : "Well done! Put this egg into your incubator, you'll soon have more chickens than you know what to do with.",
+  "title" : "^#9be3d6;Payback for the Eggstraordinary Work",
+  "text" : "Once your farm is running smoothly, if you ever need to sell any extra produce, or even a chicken or two, we would gladly ^green;buy your goods^white;. You'll need to ^green;craft a ^orange;collection bin^white;.",
+  "completionText" : "Great, throw a caged chicken, or egg carton in there, and someone will drop by later to collect them.",
   "conditions" : [
-    { "kind" : "gather", "item" : [ "eggincubator", 1] }
+    { "kind" : "gather", "item" : [ "eggstradropbox", 1] }
   ],
-  "moneyRange" : [0, 0],
+  "moneyRange" : [25, 50],
   "rewards" : [
-    [ ["eggincubator", 1], [ "egg", 1] ]
+    [ ["eggstradropbox", 1]]
   ],
   "planetMode" : "none",
   "questDungeons" : [ ],
-  "followUp" : ""
+  "followUp" : "eggstra6.gearup"
 }

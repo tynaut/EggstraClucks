@@ -1,0 +1,30 @@
+{
+  "objectName" : "easteregg",
+  "rarity" : "Common",
+  "category" : "decorative",
+  "price" : 1,
+  "description" : "Oh boy, you found an Easter egg",
+  "shortdescription" : "Easter Egg",
+  "race" : "generic",
+
+  "apexDescription" : "A little chick.",
+  "avianDescription" : "These are very valuable.",
+  "floranDescription" : "Tassty little chicken.",
+  "glitchDescription" : "Cute. It's adorable.",
+  "humanDescription" : "An adorable little chick.",
+  "hylotlDescription" : "Birds like this need protection.",
+
+  "inventoryIcon" : "eeggicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "eegg.png:<color>",
+
+      "imagePosition" : [0, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaces" : [ [0, 0] ],
+      "anchors" : [ "bottom" ]
+    }
+  ]
+}

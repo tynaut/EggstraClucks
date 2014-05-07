@@ -1,0 +1,45 @@
+{
+  "objectName" : "eggstraclock",
+  "rarity" : "Common",
+  "category" : "decorative",
+  "price" : 750,
+
+  "description" : "Tick, tock, tick, tock.",
+  "shortdescription" : "Wall Clock",
+  "race" : "generic",
+
+  "apexDescription" : "A small clock. The pendulum is calming.",
+  "avianDescription" : "It appears to be a device used for reading the time. The Avians make use of the sun.",
+  "floranDescription" : "Tick, tock, tick, tock, hehehe.",
+  "glitchDescription" : "Observe. The time on this clock changes.",
+  "humanDescription" : "A pretty little pendulum clock. The pendulum swings as the time changes.",
+  "hylotlDescription" : "The time on this clock changes.",
+
+  "inventoryIcon" : "farmclockicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "farmclock.png:<color>.1",
+      "imagePosition" : [-8, -8],
+      "frames" : 8,
+      "animationCycle" : 2,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "background" ]
+    }
+  ],
+  
+  "animation" : "/objects/eggstra/farmclock/farmclock.animation",
+
+  "animationParts" : {
+    "face" : "farmclockhand.png",
+    "body" : "farmclock.png"
+  },
+  
+  "scripts" : [ 
+    "/objects/eggstra/farmclock/farmclock.lua"
+  ],
+  "scriptDelta" : 500,
+
+  "soundEffect" : "/sfx/objects/clock_loop.wav"
+
+}

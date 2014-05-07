@@ -1,0 +1,49 @@
+{
+  "objectName" : "eggstradropbox",
+  "rarity" : "Common",
+  "objectType" : "container",
+  "description" : "A wooden collection bin for selling farm goods.",
+  "shortdescription" : "Collection Bin",
+  "race" : "generic",
+  "category" : "storage",
+  "price" : 750,
+
+  "apexDescription" : "A small wooden storage unit.",
+  "avianDescription" : "A small amount of storage.",
+  "floranDescription" : "Sstorage. Not much.",
+  "glitchDescription" : "Unimpressed. Not much storage.",
+  "humanDescription" : "A cute storage bin.",
+  "hylotlDescription" : "Small but useful.",
+
+  "inventoryIcon" : "dropboxicon.png",
+  "orientations" : [
+    {
+      "dualImage" : "dropbox.png:<color>",
+
+      "imagePosition" : [-16, 0],
+      "frames" : 1,
+      "animationCycle" : 1.0,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+
+    }
+  ],
+  
+  "scripts" : [
+    "/objects/eggstra/dropbox/dropbox.lua"
+  ],
+  "scriptDelta" : 500,
+  
+  "openSounds" : [ "/sfx/objects/chest_medium_open.wav" ],
+  "closeSounds" : [ "/sfx/objects/chest_medium_close.wav" ],
+  "slotCount" : 16,
+  "uiConfig" : "/interface/chests/chest%slots%.config",
+  "frameCooldown" : 67,
+  "autoCloseCooldown" : 3600,
+  
+  "sellable" : {
+    "filledchickencage" : 600,
+    "eggcarton" : 600
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "input" : [
+    { "item" : "grit", "count" : 1 },
+    { "item" : "groundfeed", "count" : 2 },
+    { "item" : "straw", "count" : 2 }
+  ],
+  "output" : {
+    "item" : "animalfeed",
+    "count" : 3
+  },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

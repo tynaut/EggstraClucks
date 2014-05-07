@@ -3,16 +3,24 @@
   "baseParameters" : {
     "scripts" : [ 
       "/scripts/inventoryManager.lua",
-      "/monsters/unique/chicken/secondary.lua"
+      "/monsters/unique/chicken/secondary.lua",
+      "/monsters/ground/feedState.lua",
+      "/scripts/delegate.lua",
+      "/scripts/creature.lua"
     ],
-    "eggstra" : {
-        "needForFeed" : [8, 13],
-        "cooldown" : 15.0,
-        "feedCooldown" : 180,
-        "searchRange" : 10,
-        "feedRange" : 1.5,
-        "feedTime" : [3.0, 5.0],
-        "eggTime" : [3.0, 5.0]
+    "tamedParameters" : {
+      "hunger" : 0.05,
+      "span" : 300,
+      "birthCost" : [100, 0],
+      "birthKind" : "item",
+      "birthName" : "egg",
+      "birthTime" : [3.0, 5.0],
+      "feedTime" : [3.0, 5.0],
+      "feedRange" : 1.5,
+      "feedCooldown" : 180,
+      "searchRange" : 10,
+      "cooldown" : 15,
+      "feed" : ["animalfeed", "seed"]
     }
   }
 }

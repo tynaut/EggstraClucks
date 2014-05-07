@@ -1,0 +1,7 @@
+{
+  "input" : [
+    { "item" : "rawnugget", "count" : 1 }
+  ],
+  "output" : { "item" : "cookednugget", "count" : 1 },
+  "groups" : [ "cooking", "consumables", "all" ]
+}

@@ -1,0 +1,11 @@
+{
+  "input" : [
+    { "item" : "egg", "count" : 12 },
+    { "item" : "straw", "count" : 2}
+  ],
+  "output" : {
+    "item" : "eggcarton",
+    "count" : 1
+  },
+  "groups" : [ "eggstra", "all", "other" ]
+}

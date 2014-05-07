@@ -1,0 +1,46 @@
+{
+  "objectName" : "tamingpost",
+  "rarity" : "Common",
+  "objectType" : "container",
+
+  "category" : "storage",
+  "price" : 100,
+  "description" : "A few hours in this crate will tame a wild animal.",
+  "shortdescription" : "Taming Crate",
+  "race" : "generic",
+  "printable" : false,
+
+  "apexDescription" : "A crate for taming monsters.",
+  "avianDescription" : "A crate for taming monsters.",
+  "floranDescription" : "A crate for taming monsters.",
+  "glitchDescription" : "A crate for taming monsters.",
+  "humanDescription" : "A crate for taming monsters.",
+  "hylotlDescription" : "A crate for taming monsters.",
+
+  "inventoryIcon" : "tamingposticon.png",
+  "orientations" : [
+    {
+      "dualImage" : "tamingpost.png:default",
+
+      "imagePosition" : [0, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ],
+      "collision" : "platform"
+    }
+  ],
+  
+  "scripts" : [
+    "/objects/eggstra/tamingpost/tamingpost.lua"
+  ],
+  "scriptDelta" : 100,
+
+  "openSounds" : [ "/sfx/objects/woodenbox_open.wav" ],
+  "closeSounds" : [ "/sfx/objects/woodenbox_close.wav" ],
+  "slotCount" : 1,
+  "uiConfig" : "/interface/chests/chest1.config",
+  "frameCooldown" : 67,
+  "autoCloseCooldown" : 3600
+}

@@ -1,0 +1,18 @@
+{
+  "projectileName" : "livestockpheromoneprojectile",
+  "frames" : "pheromone.png",
+  "physics" : "laser",
+  "animationCycle" : 0.5,
+  "level" : 1,
+  "damageKindImage" : "icon.png",
+  "frameNumber" : 7,
+  "power" : 0,
+  "speed" : 70,
+  "timeToLive" : 0.5,
+  "universalDamage" : true,
+  "bounces" : -1,
+  "piercing" : true,
+  "damagePoly" : [ [-9, 0], [-6, -6], [0, -9], [6, -6], [9, 0], [6, 6], [0, 9], [-6, 6] ],
+  "damageKind" : "livestockpheromone",
+  "damageType" : "ignoresdef"
+}

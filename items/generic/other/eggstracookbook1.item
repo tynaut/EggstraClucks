@@ -1,0 +1,13 @@
+{
+  "itemName" : "eggstacookbook1",
+  "rarity" : "Common",
+  "inventoryIcon" : "eggstracookbook_01.png",
+  "image" : "eggstracookbook_01.png",
+
+  "shortdescription" : "Basic Eggsamples",
+  "description" : "The first edition of Finley's farm cookbook.",
+  
+  "learnBlueprintsOnPickup" : [
+    "boiledegg", "eggbasket", "flan", "friedegg", "greeneggsandspam", "omelette", "poachedegg"
+  ]
+}

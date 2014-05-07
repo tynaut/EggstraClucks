@@ -6,7 +6,6 @@ function init(args)
     "moveState",
     "fleeState",
     "idleState",
-    "growState",
     "dieState"
   })
   self.state.leavingState = function(stateName)
@@ -21,6 +20,7 @@ end
 function main()
   self.state.update(entity.dt())
   self.sensors.clear()
+  creature.age({dt = entity.dt()})
 end
 
 function damage(args)
@@ -33,6 +33,15 @@ end
 
 function shouldDie()
   return self.dead
+end
+
+function die()
+  if creature.respawn then
+      local id,growth = creature.spawn()
+      if growth then
+        entity.setDeathParticleBurst("grow")
+      end
+  end
 end
 
 function move(direction)
@@ -134,38 +143,6 @@ function idleState.update(dt, stateData)
   if stateData.timer < 0 then
     return true,1.0
   end
-  return false
-end
---------------------------------------------------------------------------------
-growState = {}
-
-function growState.enter()
-  self.startTime = entity.configParameter("startTime", 0)
-  if self.startTime == nil then self.startTime = os.time() end
-  local age = os.time() - self.startTime
-  if self.state.stateDesc() == "growState" then return nil end
-
-  if age > entity.configParameter("lifeSpan", 120) then
-    return {}
-  end
-  
-  return nil,1.0
-end
-
-function growState.update(dt, stateData)
-  local animationState = entity.animationState("movement")
-  if animationState == "invisible" then
-    entity.setDropPool(nil)
-    local parameters = {}
-    parameters.persistent = true
-    parameters.damageTeam = 0
-    entity.setDeathParticleBurst("grow")
-    world.spawnMonster("chicken", entity.position(), parameters)
-    self.dead = true
-  elseif animationState ~= "invisible" then
-    entity.setAnimationState("movement", "invisible")
-  end
-
   return false
 end
 --------------------------------------------------------------------------------

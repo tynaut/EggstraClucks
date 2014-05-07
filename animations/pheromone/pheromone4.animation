@@ -1,0 +1,8 @@
+{
+  "frames" : "4.png",
+  "variants" : 2,
+  "loops" : 20.0,
+  "frameNumber" : 6,
+  "animationCycle" : 1,
+  "offset" : [0, 0]
+}

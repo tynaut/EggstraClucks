@@ -1,0 +1,11 @@
+{
+  "codexId" : "eggstradiary1",
+  "title" : "Reading material",
+  "codexkind" : "codex",
+  "inventoryIcon" : "eggstradiary_01.png",
+  "image" : "eggstradiary_01.png",
+  "itemName" : "eggstradiary1Codex",
+  "rarity" : "common",
+  "description" : "A basic guide to livestock farms, by Finley Ecks",
+  "shortdescription" : "Livestock Basics"
+}

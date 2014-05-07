@@ -1,0 +1,19 @@
+{
+  "__merge" : [],
+  "particleEmitters" : {
+    "female" : {
+      "particles" : [
+        { "particle" : "pheromone1" },
+        { "particle" : "pheromone1" },
+        { "particle" : "pheromone1" },
+        { "particle" : "pheromone1" },
+        { "particle" : "pheromone1" }
+      ]
+    },
+    "milking" : {
+      "particles" : [
+        { "particle" : "pheromone5" }
+      ]
+    }
+  }
+}

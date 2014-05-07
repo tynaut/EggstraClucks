@@ -1,0 +1,18 @@
+{
+    "__merge" : [],
+    "babychicktreasure" : [
+    [1, {
+        "pool" : [
+
+          [0.1, [ "rawnugget", 2] ]
+        ],
+        "poolRounds" : [
+          [0.5, 0],
+          [0.5, 1]
+
+        ],
+        "levelVariance" : [0, 0],
+        "allowDuplication" : true
+      } ]
+    ]
+}

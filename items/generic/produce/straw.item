@@ -1,0 +1,8 @@
+{
+    "__merge" : [],
+    "itemName" : "straw",
+    "rarity" : "Common",
+    "inventoryIcon" : "straw.png",
+    "description" : "An agricultural by-product, with many uses.",
+    "shortdescription" : "Straw"
+}

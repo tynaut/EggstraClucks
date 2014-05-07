@@ -1,0 +1,12 @@
+{
+  "input" : [
+    { "item" : "steelbar", "count" : 8 },
+    { "item" : "laserdiode", "count" : 3 },
+    { "item" : "circuitboard", "count" : 3 }
+  ],
+  "output" : {
+    "item" : "eggstrascanner",
+    "count" : 1
+  },
+  "groups" : [ "mod", "eggstra", "objects", "all" ]
+}

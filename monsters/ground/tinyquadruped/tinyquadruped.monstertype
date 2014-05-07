@@ -1,0 +1,22 @@
+{
+  "__merge" : [],
+  "baseParameters" : {
+    "scripts" : [
+      "/scripts/inventoryManager.lua",
+      "/monsters/ground/feedState.lua",
+      "/scripts/delegate.lua",
+      "/scripts/creature.lua"
+    ],
+    "tamedParameters" : {
+      "hunger" : 0.05,
+      "span" : 300,
+      "milkCost" : [50, 0],
+      "feedTime" : [3.0, 5.0],
+      "feedRange" : 3,
+      "feedCooldown" : 150,
+      "searchRange" : 20,
+      "cooldown" : 15,
+      "feed" : ["animalfeed"]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "itemName" : "eggstrapheromonescanner",
+  "inventoryIcon" : "pheromoneicon.png",
+  "dropCollision" : [-8.0, -3.0, 8.0, 3.0],
+  "maxStack" : 1,
+  "rarity" : "Rare",
+  "description" : "Sends out a little jolt to stimulate fluorescene in pheromones.",
+  "shortdescription" : "Pheromone Scanner",
+  "image" : "pheromone.png",
+  "handPosition" : [-3.5, -1],
+  "firePosition" : [20, 1.5],
+
+  "fireTime" : 0.5,
+  "twoHanded" : false,
+
+  "walkWhileFiring" : true,
+  
+  "projectileType" : "livestockpheromoneprojectile",
+  "projectile" : {
+    "speed" : 5,
+    "power" : 0,
+    "color" : [218, 129, 174]
+  }
+}

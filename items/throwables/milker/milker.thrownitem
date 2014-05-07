@@ -1,0 +1,27 @@
+{
+  "itemName" : "eggstramilker",
+  "inventoryIcon" : "milkericon.png",
+  "maxStack" : 1,
+  "rarity" : "Rare",
+  "description" : "Some of these strange creatures must produce milk.",
+  "shortdescription" : "Livestock Milker",
+  "image" : "milker.png",
+
+  "twoHanded" : true,
+
+  "ammoUsage" : 0,
+
+  "edgeTrigger" : false,
+  "windupTime" : 0.8,
+  "cooldown" : 1.0,
+  "handPosition" : [-3.5, -1],
+  "primaryStances" : {
+    "directional" : false
+  },
+  
+  "projectileType" : "livestockmilkingprojectile",
+  "projectileConfig" : {
+    "speed" : 5,
+    "power" : 0
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id" : "eggstra7.gearup",
+  "title" : "^#9be3d6;Cheaters never Win",
+  "text" : "You're seeing this quest because you like to cheat. You should have waited till it was added in.",
+  "completionText" : "Eggs!",
+  "conditions" : [
+    { "kind" : "gather", "item" : [ "egg", 100] }
+  ],
+  "moneyRange" : [0, 0],
+  "rewards" : [
+    [ ]
+  ],
+  "planetMode" : "none",
+  "questDungeons" : [ ],
+  "followUp" : ""
+}
