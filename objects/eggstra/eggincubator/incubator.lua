@@ -1,3 +1,8 @@
+incubation = {
+  default = 10800,
+  primedegg = 1080
+}
+
 function main()
   if entity.id() then
     local container = entity.id()
@@ -5,8 +10,8 @@ function main()
     if canHatch(item) then
         if storage.incubationTime == nil then storage.incubationTime = os.time() end
         --TODO update time to config
-        local hatchTime = 10800
-        if item.name == "primedegg" then hatchTime = hatchTime / 10 end
+        local hatchTime = incubation[item.name]
+        if hatchTime == nil then hatchTime = incubation.default end
         local delta = os.time() - storage.incubationTime
         self.indicator = math.ceil( (delta / hatchTime) * 9)
         if delta >= hatchTime then
@@ -40,8 +45,8 @@ function hatchEgg()
       local parameters = {}
       parameters.persistent = true
 	  parameters.damageTeam = 0
-      parameters.startTime = os.time()
       parameters.damageTeamType = "friendly"
+      parameters.startTime = os.time()
       world.spawnMonster("babychick", entity.position(), parameters)
     elseif item.name == "goldenegg" then
       world.spawnItem("money", entity.position(), 5000)
