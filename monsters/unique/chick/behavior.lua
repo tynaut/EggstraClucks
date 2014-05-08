@@ -20,7 +20,7 @@ end
 function main()
   self.state.update(entity.dt())
   self.sensors.clear()
-  creature.age({dt = entity.dt()})
+  creature.age(entity.dt())
 end
 
 function damage(args)

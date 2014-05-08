@@ -4,8 +4,17 @@ feedState = {}
 function feedState.enter()
   if hasTarget() then return nil end
   
-  if creature ~= nil and creature.isTamed() then
-    if self.feedCooldown == nil or self.feedCooldown > 0 then return nil end
+  if creature ~= nil and creature.isTamed() and self.feedCooldown ~= nil then
+    local delta = os.time() - self.feedCooldown
+    local cooldown = entity.configParameter("tamedParameters.feedCooldown", 10)
+    if delta < cooldown then return nil end
+    return feedState.enterWith({feed = true})
+  end
+  return nil,entity.configParameter("tamedParameters.cooldown", 10)
+end
+
+function feedState.enterWith(params)
+  if params.feed then
     local position = entity.position()
     local feed = feedState.findSeed(position)
     if feed ~= nil then
@@ -19,11 +28,6 @@ function feedState.enter()
     end
   end
   return nil,entity.configParameter("tamedParameters.cooldown", 10)
-end
-
-function feedState.enterWith(params)
-  if params.feed then return feedState.enter() end
-  return nil
 end
 -------------------------------------------------
 function feedState.update(dt, stateData)
@@ -53,8 +57,9 @@ function feedState.update(dt, stateData)
         if r.count ~= nil and r.count > 1 then
           world.spawnItem(r.name, stateData.targetPosition, r.count - 1)
         end
+        --TODO variable hunger
         self.hunger = self.hunger + 18
-        self.feedCooldown = entity.configParameter("tamedParameters.feedCooldown", 10)
+        self.feedCooldown = os.time()
         return true,entity.configParameter("tamedParameters.cooldown", 10)
       end
     end
@@ -68,12 +73,14 @@ end
 -------------------------------------------------
 function feedState.findSeed(position)
   local feedType = entity.configParameter("tamedFeedType", {"animalfeed"})
+  if type(feedType) ~= "table" then feedType = {feedType} end
   local feedRange = entity.configParameter("tamedParameters.feedRange", 2)
   local range = entity.configParameter("tamedParameters.searchRange", 5.0)
   local p1 = {position[1] - range, position[2] - 1}
   local p2 = {position[1] + range, position[2] + 1}
+  
+  --look for dropped feed
   local objectIds = world.itemDropQuery(position, range) --p1, p2)
-  if type(feedType) ~= "table" then feedType = {feedType} end
   for _,oId in pairs(objectIds) do
 	local n = world.entityName(oId)
     for i,v in ipairs(feedType) do

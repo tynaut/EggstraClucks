@@ -28,7 +28,9 @@ function birthState.update(dt, stateData)
     entity.setAnimationState("movement", "idle")
     if stateData.timer < 0 then
       local birth = creature.birth()
-      if birth.name then
+      if birth == nil then
+      
+      elseif birth.name then
         if math.random() > 0.995 then
           local mutator = entity.configParameter("tamedParameters.mutator", "")
           birth.name = mutator .. birth.name

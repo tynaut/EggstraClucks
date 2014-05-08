@@ -26,10 +26,11 @@ if delegate ~= nil then
         creature.main = nil
         creature.die = nil
         creature.damage = nil
+        creature = nil
         return
       end
       creature.main = function(args)
-        creature.age({dt = entity.dt()})
+        creature.age(entity.dt())
       end
     end
   end
@@ -49,7 +50,7 @@ if delegate ~= nil then
     elseif args.sourceKind == "livestocktreat" then
       self.hunger = self.hunger + 6
       if capturepod ~= nil and not capturepod.isCaptive() then
-        creature.beckon({sourceId = args.sourceId})
+        creature.beckon(args.sourceId)
       end
       return true
     elseif args.sourceKind == "capture" then
@@ -65,10 +66,18 @@ if delegate ~= nil then
   end
 end
 --------------------------------------------------------------------------------
+function creature.isTamed(targetId)
+  if world.isMonster(entity.id()) then
+    --Some "wild" tamed creatures should be included
+    if entity.type() == "chicken" then return true end
+    local teamType = entity.configParameter("damageTeamType", nil)
+    return teamType == "friendly" and capturepod ~= nil and not capturepod.isCaptive()
+  end
+  return nil
+end
+--------------------------------------------------------------------------------
 function creature.uniqueParameters()
-  if type(targetId) == "number" then
-    return world.callScriptedEntity(targetId, "creature.uniqueParameters")
-  elseif world.isMonster(entity.id()) then
+  if world.isMonster(entity.id()) then
     local params = entity.uniqueParameters()
     params.gender = creature.gender()
     if self.hunger then params.hunger = self.hunger end
@@ -103,18 +112,13 @@ function creature.basicParameters()
   return nil
 end
 --------------------------------------------------------------------------------
-function creature.despawn(targetId)
-  if type(targetId) == "number" then
-    return world.callScriptedEntity(targetId, "creature.despawn")
-  elseif world.isMonster(entity.id()) then
-    creature.main = nil
-    creature.damage = nil
-    local params = creature.uniqueParameters()
-    entity.setDropPool(nil)
-    self.dead = true
-    return params
-  end
-  return nil
+function creature.despawn()
+  creature.main = nil
+  creature.damage = nil
+  local params = creature.uniqueParameters()
+  entity.setDropPool(nil)
+  self.dead = true
+  return params
 end
 --------------------------------------------------------------------------------
 function creature.spawn()
@@ -151,83 +155,63 @@ function creature.spawn()
   return id,growth
 end
 --------------------------------------------------------------------------------
-function creature.age(args)
-  if type(args) ~= "table" then return nil end
-  if args.targetId then
-    return world.callScriptedEntity(targetId, "creature.age", args.dt)
-  else
-    if self.age == nil then
-      self.age = entity.configParameter("age", { stage = 0, spawn = os.time() })
-    end
-    if args.dt == nil then args.dt = entity.dt() end
-    if self.tparams == nil then self.tparams = entity.configParameter("tamedParameters", {}) end
-    if self.tparams.hunger then
-      local d = args.dt * self.tparams.hunger
-      if self.hunger == nil then self.hunger = entity.configParameter("hunger", 25) end
-      if self.state and self.state.stateDesc() == "grazeState" then d = d * -1 end
-      if self.hunger > -10 then self.hunger = self.hunger - d end
-    end
-    if self.tparams.thirst then
-      if self.thirst == nil then self.thirst = entity.configParameter("thirst", 25) end
-      if self.thirst > -10 then self.thirst = self.thirst - (args.dt * self.tparams.thirst) end
-    end
-    if (self.hunger and self.hunger < 1) or (self.thirst and self.thirst < 1) then self.feedCooldown = 0 end
-    if self.feedCooldown == nil then
-      self.feedCooldown = entity.configParameter("feedCooldown", 1)
-    elseif self.feedCooldown > 0 then
-      self.feedCooldown = self.feedCooldown - args.dt
-      if self.feedCooldown <= 0 then
-        if self.state then self.state.pickState({feed = true}) end
-      end
-    end
-    if self.furGrowth == nil then self.furGrowth = entity.configParameter("furGrowth", os.time()) end
-    if not creature.realtime and self.pregnant and self.pregnant > 0 then
-      self.pregnant = self.pregnant - args.dt
-      if self.pregnant < 0 then self.pregnant = 0 end
-    end
+function creature.age(dt)
+  if type(dt) ~= number then dt = entity.dt() end
+  if self.age == nil then
+    self.age = entity.configParameter("age", { stage = 0, spawn = os.time() })
+  end
+  if self.tparams == nil then self.tparams = entity.configParameter("tamedParameters", {}) end
+  if self.tparams.hunger then
+    local d = dt * self.tparams.hunger
+    if self.hunger == nil then self.hunger = entity.configParameter("hunger", 25) end
+    if self.state and self.state.stateDesc() == "grazeState" then d = d * -1 end
+    if self.hunger > -10 then self.hunger = self.hunger - d end
+  end
+  if self.tparams.thirst then
+    if self.thirst == nil then self.thirst = entity.configParameter("thirst", 25) end
+    if self.thirst > -10 then self.thirst = self.thirst - (dt * self.tparams.thirst) end
+  end
+  --if (self.hunger and self.hunger < 1) or (self.thirst and self.thirst < 1) then self.feedCooldown = 0 end
+  --if self.feedCooldown == nil then
+  --  self.feedCooldown = entity.configParameter("feedCooldown", 1)
+  --elseif self.feedCooldown > 0 then
+  --  self.feedCooldown = self.feedCooldown - dt
+  --  if self.feedCooldown <= 0 then
+  --    if self.state then self.state.pickState({feed = true}) end
+  --  end
+  --end
+  if self.feedCooldown == nil then self.feedCooldown = entity.configParameter("feedCooldown", os.time()) end
+  if self.furGrowth == nil then self.furGrowth = entity.configParameter("furGrowth", os.time()) end
+  
+  if not creature.realtime and self.pregnant and self.pregnant > 0 then
+    self.pregnant = self.pregnant - dt
+    if self.pregnant < 0 then self.pregnant = 0 end
+  end
 
-    --death by
-    if creature.starvation then
-      if (self.hunger and self.hunger <= -10) or (self.thirst and self.thirst <= -10) then
-        self.dead = true
-        creature.respawn = false
-      end
-    end
-    --aging
-    if self.tparams.span then
-      if type(self.updateSpan) ~= "number" then self.updateSpan = 0 end
-      self.updateSpan = self.updateSpan + args.dt
-      if self.updateSpan > self.tparams.span then
-        self.age.stage = self.age.stage + 1
-        creature.respawn = true
-        return creature.despawn()
-      end
+  --death by
+  if creature.starvation then
+    if (self.hunger and self.hunger <= -10) or (self.thirst and self.thirst <= -10) then
+      self.dead = true
+      creature.respawn = false
     end
   end
-  return nil
+  --aging
+  if self.tparams.span then
+    if type(self.updateSpan) ~= "number" then self.updateSpan = 0 end
+    self.updateSpan = self.updateSpan + dt
+    if self.updateSpan > self.tparams.span then
+      self.age.stage = self.age.stage + 1
+      creature.respawn = true
+      return creature.despawn()
+    end
+  end
 end
 --------------------------------------------------------------------------------
-function creature.beckon(args)
-  if type(args) ~= "table" then return end
-  if args.targetId then
-    return world.callScriptedEntity(targetId, "creature.beckon", {sourceId = args.sourceId})
-  else
-    if args.sourceId and self.state then
-      return self.state.pickState({beckonId = args.sourceId})
-    end
-    return false
+function creature.beckon(sourceId)
+  if type(sourceId) == "number" and self.state then
+    return self.state.pickState({beckonId = sourceId})
   end
-  return nil
-end
---------------------------------------------------------------------------------
-function creature.isTamed(targetId)
-  if world.isMonster(entity.id()) then
-    --Some "wild" tamed creatures should be included
-    if entity.type() == "chicken" then return true end
-    local teamType = entity.configParameter("damageTeamType", nil)
-    return teamType == "friendly" and capturepod ~= nil and not capturepod.isCaptive()
-  end
-  return nil
+  return false
 end
 --------------------------------------------------------------------------------
 function creature.gender(targetId)
@@ -253,44 +237,35 @@ function creature.gender(targetId)
   return nil
 end
 --------------------------------------------------------------------------------
-function creature.canMate(args)
-  if type(args) ~= "table" then return end
-  if args.sourceId then
-    return world.callScriptedEntity(args.sourceId, "creature.canMate", {targetId = args.targetId})
-  elseif creature.isTamed() then
-    if args.targetId then
-      local g1 = creature.gender()
-      local g2 = creature.gender(args.targetId)
-      if g2 == 0 and creature.isPregnant({targetId = args.targetId}) then return false end
-      if (g1 == 1 and g2 == 0) or (g1 == 2 and g2 == 2) then
-        local cost = self.tparams.matingCost
-        if cost == nil then return false end
-        if self.hunger and cost[1] and cost[1] > self.hunger then return false end
-        if self.thirst and cost[2] and cost[2] > self.thirst then return false end
-        return true
-      end
-      return false
+function creature.canMate(targetId)
+  if type(targetId) == "number" then
+    local g1 = creature.gender()
+    local g2 = creature.gender(targetId)
+    if g2 == 0 and creature.isPregnant({targetId = targetId}) then return false end
+    if (g1 == 1 and g2 == 0) or (g1 == 2 and g2 == 2) then
+      local cost = self.tparams.matingCost
+      if cost == nil then return false end
+      if self.hunger and cost[1] and cost[1] > self.hunger then return false end
+      if self.thirst and cost[2] and cost[2] > self.thirst then return false end
+      return true
     end
   end
-  return nil
+  return false
 end
 --------------------------------------------------------------------------------
-function creature.mate(args)
-  if type(args) ~= "table" then return end
-  if args.sourceId then
-    return world.callScriptedEntity(args.sourceId, "creature.mate", {targetId = args.targetId})
-  else
-    if args.targetId then
-      local cost = self.tparams.matingCost
-      if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
-      if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
-      if creature.gender(args.targetId) == 0 then
-        local pregnancy = entity.configParameter("tamedParameters.termLength", 1)
-        if creature.realtime then pregnancy = os.time() end
-        creature.isPregnant({targetId = args.targetId, seed = entity.seed(), pregnant = pregnancy})
-      end
+function creature.mate(targetId)
+  if type(targetId) == "number" then
+    local cost = self.tparams.matingCost
+    if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
+    if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
+    if creature.gender(targetId) == 0 then
+      local pregnancy = entity.configParameter("tamedParameters.termLength", 1)
+      if creature.realtime then pregnancy = os.time() end
+      creature.isPregnant({targetId = args.targetId, seed = entity.seed(), pregnant = pregnancy})
     end
+    return true
   end
+  return false
 end
 --------------------------------------------------------------------------------
 function creature.isPregnant(args)
@@ -318,11 +293,9 @@ end
 
 --------------------------------------------------------------------------------
 function creature.birth(targetId)
-  --TODO check pregnant
+  if self.pregnant == -1 then return end
+  
   local cost = self.tparams.birthCost
-  --if cost == nil then return nil end
-  --if self.hunger and cost[1] and cost[1] > self.hunger then return nil end
-  --if self.thirst and cost[2] and cost[2] > self.thirst then return nil end
   if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
   if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
   self.pregnant = -1
@@ -336,22 +309,17 @@ function creature.birth(targetId)
   }
 end
 --------------------------------------------------------------------------------
-function creature.canMilk(targetId)
-  if type(targetId) == "number" then
-    return world.callScriptedEntity(targetId, "creature.canMilk")
-  elseif creature.isTamed() then
-    local g = creature.gender()
-    if g == 0 and not creature.isPregnant() then
-      local cost = self.tparams.milkCost
-      local milk = entity.randomizeParameter("tamedMilkType")
-      if cost == nil or milk == nil then return false end
-      if self.hunger and cost[1] and cost[1] > self.hunger then return false end
-      if self.thirst and cost[2] and cost[2] > self.thirst then return false end
-      return true
-    end
-    return false
+function creature.canMilk()
+  local g = creature.gender()
+  if g == 0 and not creature.isPregnant() then
+    local cost = self.tparams.milkCost
+    local milk = entity.randomizeParameter("tamedMilkType")
+    if cost == nil or milk == nil then return false end
+    if self.hunger and cost[1] and cost[1] > self.hunger then return false end
+    if self.thirst and cost[2] and cost[2] > self.thirst then return false end
+    return true
   end
-  return nil
+  return false
 end
 --------------------------------------------------------------------------------
 function creature.milk(targetId)

@@ -48,9 +48,9 @@ function matingState.update(dt, stateData)
   entity.setRunning(stateData.running)
 
   if movement == 0 and stateData.timer < 0 then
-    if creature.canMate({targetId = stateData.mateId}) then
+    if creature.canMate(stateData.mateId) then
       entity.playSound(entity.randomizeParameter("idleNoise"))
-      creature.mate({targetId = stateData.mateId})
+      creature.mate(stateData.mateId)
     end
   end
   return stateData.timer < 0
@@ -67,7 +67,7 @@ function matingState.findTarget(position)
     objectIds = world.monsterQuery(position, range, { callScript = "entity.seed", callScriptResult = entity.seed(), withoutEntityId = entity.id() })
   end
   for _,oId in pairs(objectIds) do
-    if creature.canMate({targetId = oId}) then
+    if creature.canMate(oId) then
       return oId
     end
   end
