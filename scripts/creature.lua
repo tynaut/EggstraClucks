@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 creature = {
   starvation = false,
-  oldage = false,
+  oldage = true,
   realtime = true,
   furTime = 720,
   maxHunger = 150,
@@ -60,8 +60,10 @@ if delegate ~= nil then
   
   creature.die = function()
     if creature.respawn then
-      entity.setDeathParticleBurst(nil)
-      creature.spawn()
+      local id,growth = creature.spawn()
+      if id ~= nil then
+        entity.setDeathParticleBurst(nil)
+      end
     end
   end
 end
@@ -112,13 +114,13 @@ function creature.basicParameters()
   return nil
 end
 --------------------------------------------------------------------------------
-function creature.despawn()
+function creature.despawn(respawn)
+  creature.respawn = respawn
   creature.main = nil
   creature.damage = nil
-  local params = creature.uniqueParameters()
   entity.setDropPool(nil)
   self.dead = true
-  return params
+  return creature.uniqueParameters()
 end
 --------------------------------------------------------------------------------
 function creature.spawn()
@@ -201,8 +203,7 @@ function creature.age(dt)
     self.updateSpan = self.updateSpan + dt
     if self.updateSpan > self.tparams.span then
       self.age.stage = self.age.stage + 1
-      creature.respawn = true
-      return creature.despawn()
+      return creature.despawn(true)
     end
   end
 end
@@ -261,7 +262,7 @@ function creature.mate(targetId)
     if creature.gender(targetId) == 0 then
       local pregnancy = entity.configParameter("tamedParameters.termLength", 1)
       if creature.realtime then pregnancy = os.time() end
-      creature.isPregnant({targetId = args.targetId, seed = entity.seed(), pregnant = pregnancy})
+      creature.isPregnant({targetId = targetId, seed = entity.seed(), pregnant = pregnancy})
     end
     return true
   end
@@ -301,8 +302,7 @@ function creature.birth(targetId)
   self.pregnant = -1
   
   --TODO death during birth
-  creature.respawn = true
-  creature.despawn()
+  creature.despawn(true)
   return {
     name = self.tparams.birthItem,
     count = 1
@@ -331,8 +331,7 @@ function creature.milk(targetId)
     if milk then
       world.spawnItem(milk, entity.position(), 1)
     end
-    creature.respawn = true
-    creature.despawn()
+    creature.despawn(true)
     return true
   end
   creature.displayStatus()
@@ -354,8 +353,7 @@ function creature.shear(targetId)
     if count > 5 then count = 5 end
     world.spawnItem(fibre, entity.position(), count)
     self.furGrowth = os.time()
-    creature.respawn = true
-    creature.despawn()
+    creature.despawn(true)
     return true
   end
   entity.burstParticleEmitter("fur")
@@ -394,7 +392,6 @@ function creature.slaughter(args)
         end
       end
     end
-    creature.respawn = false
     creature.despawn()
     return true
   end
@@ -443,7 +440,7 @@ function creature.displayStatus(targetId)
   local p = entity.position()
   local bounds = entity.configParameter("metaBoundBox")
   if bounds then
-    p[1] = p[1] + bounds[1]/2
+    p[1] = p[1] - 1.25
     p[2] = p[2] + bounds[4]/2
   end
   creature.spawnStatusBar(generation, "age", p)
