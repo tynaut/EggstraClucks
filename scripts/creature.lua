@@ -16,7 +16,7 @@ creature = {
 --------------------------------------------------------------------------------
 if delegate ~= nil then
   delegate.create("creature")
-  creature.init = function()  
+  creature.init = function() 
 
   end
   
@@ -30,6 +30,9 @@ if delegate ~= nil then
         return
       end
       creature.main = function(args)
+        if storage.spawnPoint == nil then
+          storage.spawnPoint = entity.configParameter("spawnPoint", entity.position())
+        end
         creature.age(entity.dt())
       end
     end
@@ -88,6 +91,7 @@ function creature.uniqueParameters()
     if self.pregnant then params.pregnant = self.pregnant end
     if self.pSeed then params.pSeed = self.pSeed end
     if self.furGrowth then params.furGrowth = self.furGrowth end
+    if storage.spawnPoint then params.spawnPoint = storage.spawnPoint end
     params.age = self.age
     params.type = entity.type()
     params.seed = entity.seed()
@@ -480,4 +484,22 @@ end
 function creature.deposit(containerId, item)
   if type(containerId) ~= "number" then return item end
   return world.containerAddItems(containerId, item)
+end
+--------------------------------------------------------------------------------
+function checkTerritory()
+  local home = storage.basePosition
+  if creature and creature.isTamed() and storage.spawnPoint then
+    home = storage.spawnPoint
+  end
+  local tdist = entity.configParameter("territoryDistance")
+  local hdist = world.distance(self.position, home)[1]
+  
+  if hdist > tdist then
+    self.territory = -1
+    return
+  elseif hdist < -tdist then
+    self.territory = 1
+  else
+    self.territory = 0
+  end
 end
