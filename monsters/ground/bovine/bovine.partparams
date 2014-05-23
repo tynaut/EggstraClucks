@@ -3,7 +3,7 @@
     "weightMultiplier" : [ "multiply", 1.0],
     "walkMultiplier" : [ "multiply", 1.0],
     "runMultiplier" : [ "multiply", 1.0],
-    "jumpMultiplier" : [ "multiply", 1.0],
+    "jumpMultiplier" : [ "multiply", 0.2],
 
     "idleNoise" : [ "merge", [ ] ],
     "turnHostileNoise" : [ "merge", [ ] ],
