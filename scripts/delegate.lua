@@ -1,3 +1,5 @@
+--------------------------------------------------------------------------------
+--SAFETY CHECK
 if delegate == nil then
 --------------------------------------------------------------------------------
 delegate = {
@@ -73,7 +75,7 @@ function delegate.triggerAll(functionName, args)
 end
 --------------------------------------------------------------------------------
 function delegate.callback(targetName, functionName, args)
-    if _ENV[targetName] ~= nil and _ENV[targetName][functionName] ~= nil then
+    if _ENV[targetName] ~= nil and type(_ENV[targetName][functionName]) == "function" then
         return _ENV[targetName][functionName](args)
     end
 end
@@ -104,3 +106,5 @@ function delegate.delayTick()
 end
 --------------------------------------------------------------------------------
 end
+--END SAFETY CHECK
+--------------------------------------------------------------------------------
