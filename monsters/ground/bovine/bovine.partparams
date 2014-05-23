@@ -19,7 +19,7 @@
     "tamedParameters" : [ "merge", 
       {
         "hunger" : 0.05,
-        "generations" : 7,
+        "generations" : 8,
         "stages" : [48, 172800],
         "span" : 180,
         "birthCost" : [100, 0],
