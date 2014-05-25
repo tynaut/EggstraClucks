@@ -58,7 +58,7 @@ function feedState.update(dt, stateData)
           world.spawnItem(r.name, stateData.targetPosition, r.count - 1)
         end
         --TODO variable hunger
-        self.hunger = self.hunger + 18
+        creature.updateHunger(18)
         self.feedCooldown = os.time()
         return true,entity.configParameter("tamedParameters.cooldown", 10)
       end

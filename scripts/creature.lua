@@ -6,6 +6,7 @@ creature = {
   furTime = 720,
   maxHunger = 150,
   barTicks = 8,
+  day = 86400,
   pheromones = {
     resource = 0.2,
     pregnancy = 0.5,
@@ -51,7 +52,7 @@ if delegate ~= nil then
       creature.releasePheromone({pheromone = str})
       return true
     elseif args.sourceKind == "livestocktreat" then
-      self.hunger = self.hunger + 6
+      creature.updateHunger(6)
       if capturepod ~= nil and not capturepod.isCaptive() then
         creature.beckon(args.sourceId)
       end
@@ -167,25 +168,8 @@ function creature.age(dt)
     self.age = entity.configParameter("age", { stage = 0, spawn = os.time() })
   end
   if self.tparams == nil then self.tparams = entity.configParameter("tamedParameters", {}) end
-  if self.tparams.hunger then
-    local d = dt * self.tparams.hunger
-    if self.hunger == nil then self.hunger = entity.configParameter("hunger", 25) end
-    if self.state and self.state.stateDesc() == "grazeState" then d = d * -1 end
-    if self.hunger > -10 then self.hunger = self.hunger - d end
-  end
-  if self.tparams.thirst then
-    if self.thirst == nil then self.thirst = entity.configParameter("thirst", 25) end
-    if self.thirst > -10 then self.thirst = self.thirst - (dt * self.tparams.thirst) end
-  end
-  --if (self.hunger and self.hunger < 1) or (self.thirst and self.thirst < 1) then self.feedCooldown = 0 end
-  --if self.feedCooldown == nil then
-  --  self.feedCooldown = entity.configParameter("feedCooldown", 1)
-  --elseif self.feedCooldown > 0 then
-  --  self.feedCooldown = self.feedCooldown - dt
-  --  if self.feedCooldown <= 0 then
-  --    if self.state then self.state.pickState({feed = true}) end
-  --  end
-  --end
+  if self.state and self.state.stateDesc() == "grazeState" then creature.updateHunger(dt * self.tparams.hunger) end
+  --TODO Drinking state for thirst
   if self.feedCooldown == nil then self.feedCooldown = entity.configParameter("feedCooldown", os.time()) end
   if self.furGrowth == nil then self.furGrowth = entity.configParameter("furGrowth", os.time()) end
   
@@ -196,7 +180,7 @@ function creature.age(dt)
 
   --death by
   if creature.starvation then
-    if (self.hunger and self.hunger <= -10) or (self.thirst and self.thirst <= -10) then
+    if (creature.getHunger() <= -10) or (creature.getThirst() <= -10) then
       self.dead = true
       creature.respawn = false
     end
@@ -210,6 +194,38 @@ function creature.age(dt)
       return creature.despawn(true)
     end
   end
+end
+--------------------------------------------------------------------------------
+function creature.getHunger()
+  if self.tparams == nil or self.tparams.hunger == nil then return 0 end
+  if self.hunger == nil then self.hunger = entity.configParameter("hunger", 25) end
+  if type(self.hunger) == "number" then self.hunger = {t = os.time(), v = self.hunger} end
+  local dt = os.time() - self.hunger.t
+  local dh = self.hunger.v - (dt * self.tparams.hunger)
+  if dh < -100 then dh = -100 end
+  return dh
+end
+--------------------------------------------------------------------------------
+function creature.updateHunger(value)
+  if type(value) ~= "number" then return end
+  local h = creature.getHunger() + value
+  self.hunger = {t = os.time(), v = h}
+end
+--------------------------------------------------------------------------------
+function creature.getThirst()
+  if self.tparams == nil or self.tparams.thirst == nil then return 0 end
+  if self.thirst == nil then self.thirst = entity.configParameter("thirst", 25) end
+  if type(self.thirst) == "number" then self.thirst = {t = os.time(), v = self.thirst} end
+  local dt = os.time() - self.thirst.t
+  local dh = self.thirst.v - (dt * self.tparams.thirst)
+  if dh < -100 then dh = -100 end
+  return dh
+end
+--------------------------------------------------------------------------------
+function creature.updateThirst(value)
+  if type(value) ~= "number" then return end
+  local h = creature.getThirst() + value
+  self.thirst = {t = os.time(), v = h}
 end
 --------------------------------------------------------------------------------
 function creature.beckon(sourceId)
@@ -250,8 +266,8 @@ function creature.canMate(targetId)
     if (g1 == 1 and g2 == 0) or (g1 == 2 and g2 == 2) then
       local cost = self.tparams.matingCost
       if cost == nil then return false end
-      if self.hunger and cost[1] and cost[1] > self.hunger then return false end
-      if self.thirst and cost[2] and cost[2] > self.thirst then return false end
+      if cost[1] and cost[1] > creature.getHunger() then return false end
+      if cost[2] and cost[2] > creature.getThirst() then return false end
       return true
     end
   end
@@ -261,8 +277,8 @@ end
 function creature.mate(targetId)
   if type(targetId) == "number" then
     local cost = self.tparams.matingCost
-    if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
-    if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
+    if cost[1] then creature.updateHunger(cost[1] * -1) end
+    if cost[2] then creature.updateThirst(cost[2] * -1) end
     if creature.gender(targetId) == 0 then
       local pregnancy = entity.configParameter("tamedParameters.termLength", 1)
       if creature.realtime then pregnancy = os.time() end
@@ -301,8 +317,8 @@ function creature.birth(targetId)
   if self.pregnant == -1 then return end
   
   local cost = self.tparams.birthCost
-  if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
-  if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
+  if cost[1] then creature.updateHunger(cost[1] * -1) end
+  if cost[2] then creature.updateThirst(cost[2] * -1) end
   self.pregnant = -1
   
   --TODO death during birth
@@ -319,8 +335,8 @@ function creature.canMilk()
     local cost = self.tparams.milkCost
     local milk = entity.randomizeParameter("tamedMilkType")
     if cost == nil or milk == nil then return false end
-    if self.hunger and cost[1] and cost[1] > self.hunger then return false end
-    if self.thirst and cost[2] and cost[2] > self.thirst then return false end
+    if cost[1] and cost[1] > creature.getHunger() then return false end
+    if cost[2] and cost[2] > creature.getThirst() then return false end
     return true
   end
   return false
@@ -330,8 +346,8 @@ function creature.milk(targetId)
   if creature.canMilk() then
     local cost = self.tparams.milkCost
     local milk = entity.randomizeParameter("tamedMilkType")
-    if cost[1] and self.hunger then self.hunger = self.hunger - cost[1] end
-    if cost[2] and self.thirst then self.thirst = self.thirst - cost[2] end
+    if cost[1] then creature.updateHunger(cost[1] * -1) end
+    if cost[2] then creature.updateThirst(cost[2] * -1) end
     if milk then
       world.spawnItem(milk, entity.position(), 1)
     end
@@ -381,7 +397,7 @@ function creature.slaughter(args)
     if self.tparams.generations then 
       generation = math.abs(self.tparams.generations / 2 - entity.configParameter("generation", 2)) * 2 / self.tparams.generations
     end
-    local hunger = self.hunger / creature.maxHunger
+    local hunger = creature.getHunger() / creature.maxHunger
     local primed = (hunger + generation) / 2
     local slaughter = entity.configParameter("slaughterPool")
     if slaughter ~= nil then
@@ -428,10 +444,10 @@ function creature.releasePheromone(args)
       entity.burstParticleEmitter("pregnant")
     end
   elseif args.pheromone == "energy" then
-    if self.hunger and self.hunger < 10 then
+    if creature.getHunger() < 10 then
       entity.burstParticleEmitter("hunger")
     end
-    if self.thirst and self.thirst < 10 then
+    if creature.getThirst() < 10 then
       entity.burstParticleEmitter("thirst")
     end
   end
@@ -440,7 +456,7 @@ end
 function creature.displayStatus(targetId)
   if self.tparams == nil or self.tparams.generations == nil then return nil end
   local generation = entity.configParameter("generation", 2) / self.tparams.generations
-  local hunger = self.hunger / creature.maxHunger
+  local hunger = creature.getHunger() / creature.maxHunger
   local p = entity.position()
   local bounds = entity.configParameter("metaBoundBox")
   if bounds then

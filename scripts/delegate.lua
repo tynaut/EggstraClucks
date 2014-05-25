@@ -1,9 +1,17 @@
 --------------------------------------------------------------------------------
 --SAFETY CHECK
+if delegate and delegate.v < 5 then
+  init = delegate.init
+  main = delegate.main
+  die = delegate.die
+  damage = delegate.damage
+  interact = delegate.interact
+  delegate = nil
+end
 if delegate == nil then
 --------------------------------------------------------------------------------
 delegate = {
-    v = 4,
+    v = 5,
     delegates = {},
     callbacks = {}
 }
