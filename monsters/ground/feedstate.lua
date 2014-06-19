@@ -7,8 +7,9 @@ function feedState.enter()
   if creature ~= nil and creature.isTamed() and self.feedCooldown ~= nil then
     local delta = os.time() - self.feedCooldown
     local cooldown = entity.configParameter("tamedParameters.feedCooldown", 10)
-    if delta < cooldown then return nil end
-    return feedState.enterWith({feed = true})
+    if delta > cooldown and creature.getHunger() < creature.maxHunger then
+        return feedState.enterWith({feed = true})
+    end
   end
   return nil,entity.configParameter("tamedParameters.cooldown", 10)
 end
