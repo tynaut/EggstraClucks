@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --SAFETY CHECK
-if delegate and delegate.v < 5 then
+if delegate and (delegate.v == nil or delegate.v < 6) then
   init = delegate.init
   main = delegate.main
   die = delegate.die
@@ -11,7 +11,7 @@ end
 if delegate == nil then
 --------------------------------------------------------------------------------
 delegate = {
-    v = 5,
+    v = 6,
     delegates = {},
     callbacks = {}
 }
@@ -57,6 +57,7 @@ function interact(args)
     if not result then result = delegate.triggerAll("interact", args) end
     if not result and delegate.interact ~= nil then result = delegate.interact(args) end
     if not result then result = delegate.triggerAll("postInteract", args) end
+    if type(result) == "boolean" then result = nil end
     return result
 end
 --------------------------------------------------------------------------------
