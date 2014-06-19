@@ -12,7 +12,8 @@ creature = {
     pregnancy = 0.5,
     gender = 0.5,
     energy = 0.8
-  }
+  },
+  firstRun = true
 }
 --------------------------------------------------------------------------------
 if delegate ~= nil then
@@ -128,19 +129,23 @@ function creature.despawn(respawn)
   return creature.uniqueParameters()
 end
 --------------------------------------------------------------------------------
-function creature.spawn()
-  if not world.isMonster(entity.id()) then return nil end
-  local params = creature.uniqueParameters()
-  local growth = false
-  
+function creature.isReady()
   if self.tparams.stages ~= nil then
     if creature.realtime then
       local delta = os.time() - self.age.spawn
-      growth = delta > self.tparams.stages[2]
+      return delta > self.tparams.stages[2]
     else
-      growth = self.tparams.stages[1] and self.age.stage >= self.tparams.stages[1]
+      return self.tparams.stages[1] and self.age.stage >= self.tparams.stages[1]
     end
   end
+  return false
+end
+--------------------------------------------------------------------------------
+function creature.spawn()
+  if not world.isMonster(entity.id()) then return nil end
+  local params = creature.uniqueParameters()
+  local growth = creature.isReady()
+  
   if growth then
     local generation = entity.configParameter("generation", 2)
     if generation == 1 or self.tparams.growthType ~= nil then
@@ -189,7 +194,8 @@ function creature.age(dt)
   if self.tparams.span then
     if type(self.updateSpan) ~= "number" then self.updateSpan = 0 end
     self.updateSpan = self.updateSpan + dt
-    if self.updateSpan > self.tparams.span then
+    if self.updateSpan > self.tparams.span or (creature.firstRun and creature.isReady()) then
+      creature.firstRun = false
       self.age.stage = self.age.stage + 1
       return creature.despawn(true)
     end
